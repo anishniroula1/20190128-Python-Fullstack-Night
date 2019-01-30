@@ -15,6 +15,8 @@ Python: 2, (3), 4, (5), 6, 7, 8
     - eunika@pdxcodeguild.com
     - 724-472-8294
     
+- Remington Henderson (TA)
+    
 ## Outside Resources
 - Python: 
     - Practice:
