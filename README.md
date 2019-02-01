@@ -6,6 +6,7 @@ M-F 6:00PM – 9:30PM
 
 ## Labs Assigned
 *Optional labs are in parentheses*
+
 Python: 2, (3), 4, (5), 6, 7, 8
 
 ## Class Members
