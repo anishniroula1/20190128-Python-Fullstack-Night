@@ -7,7 +7,12 @@ M-F 6:00PM – 9:30PM
 ## Labs Assigned
 *Optional labs are in parentheses*
 
-Python: 2, (3), 4, (5), 6, 7, 8
+### Python 
+| Assigned on | Lab \#s |
+| ------------- | ---- |
+| 1/28 | 2 |
+| 1/29 | (3), 4, (5), 6, 7, 8 |
+| 1/31 | 9, 10, 11, 12 |
 
 ## Class Members
 
