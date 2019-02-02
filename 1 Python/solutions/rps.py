@@ -19,26 +19,30 @@ def calc_winner(comp_choice, user_choice):
     else: # elif defeats[comp_choice] != user_choice
         return 'User wins'
 
-rps = ['rock', 'paper', 'scissors']
-while True: # loop game until user wants to stop
+while True:
+    rps = ['rock', 'paper', 'scissors']
     while True: # input validation
         user_choice = input('Rock, paper, or scissors: ').strip().lower()
         if user_choice in rps:
             break
     computer_choice = random.choice(rps)
     print(computer_choice)
-    print(calc_winner(computer_choice, user_choice))
+    winner = calc_winner(computer_choice, user_choice)
+    print(winner)
 
-    while True: # input validation
-        play_again = input('Do you want to play again: ').strip().lower()
-        if play_again in ['y', 'yes', 'n', 'no']:
-            break 
-
-    if play_again.startswith('n'):
+    # rematch if the user loses
+    if winner in ['Computer wins', 'Tie']:
+        while True: # input validation
+            play_again = input('Do you want to play again: ').strip().lower()
+            if play_again in ['yes', 'no']:
+                break
+        if play_again == 'no': # break out of entire program
+            break
+    else:
         break
 
-# You can test your logic by passing test inputs into your function
-# This is easier to test than working with random inputs
+# # You can test your logic by passing test inputs into your function
+# # This is easier to test than working with random inputs
 # print(calc_winner('rock', 'rock'))
 # print(calc_winner('rock', 'paper'))
 # print(calc_winner('rock', 'scissors'))
