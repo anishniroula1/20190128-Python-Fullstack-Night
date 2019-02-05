@@ -5,6 +5,13 @@ from random import randint as random_integer
 def is_even(a):
     """
     returns if a is even
+
+    >>> is_even(1)
+    False
+    >>> is_even(2)
+    True
+    >>> is_even(0)
+    True
     """
     # if a % 2 == 0:
     #     return True 
@@ -15,6 +22,15 @@ def is_even(a):
 def opposite(a, b):
     """
     returns if a and b have opposite polarity
+
+    >>> opposite(1,0)
+    False
+    >>> opposite(-1,-2)
+    False
+    >>> opposite(-1,1)
+    True
+    >>> opposite(1,-1)
+    True
     """
     # if (a >= 0 and b >= 0) or (a < 0 and b < 0):
     #     return False
@@ -27,6 +43,9 @@ def opposite(a, b):
 def double_letters(text):
     """
     returns string of each letter in text doubled
+
+    >>> double_letters('hello')
+    'hheelllloo'
     """
     double = ''
     for char in text:
@@ -51,13 +70,13 @@ def random_element(l):
     return 'empty list'
 
 
-print('5 is even: ', is_even(5))
-print('6 is even: ', is_even(6))
+def lists_to_dict(keys, values):
+    """
+    returns dictionary of keys  mapped to values
+    :keys: list
+    :values: list
 
-print(opposite(1, 2))
-print(opposite(-1, -2))
-print(opposite(1, -2))
-print(opposite(-1, 2))
-
-print(double_letters('hello'))
-print(random_element([]))
+    >>> lists_to_dict(['a','b','c'], ['aardvark','bear','coyote'])
+    {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
+    """
+    pass
