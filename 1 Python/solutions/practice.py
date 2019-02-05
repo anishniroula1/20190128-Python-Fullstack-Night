@@ -64,19 +64,39 @@ def random_element(l):
     """
     returns random element in list l
     """
+    print('in random_element', combined)
     if l:
         index = random_integer(0, len(l)-1)
         return l[index]
     return 'empty list'
 
+combined = 'just a string'
+
 
 def lists_to_dict(keys, values):
     """
-    returns dictionary of keys  mapped to values
+    returns dictionary of keys mapped to values
     :keys: list
     :values: list
-
-    >>> lists_to_dict(['a','b','c'], ['aardvark','bear','coyote'])
-    {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
     """
-    pass
+    # combined = {}
+    # for i in range(len(keys)):
+    #     # print(i, keys[i], values[i])
+    #     combined[keys[i]] = values[i]
+    # return combined
+
+    # # equivalent to above
+    # return {keys[i]:values[i] for i in range(len(keys))}
+
+    return dict(zip(keys, values))
+
+
+fruits = ['apple', 'banana', 'pear']
+prices = [1.2, 3.3, 2.1]
+print(lists_to_dict(fruits, prices)) # -> {'apple':1.2, 'banana':3.3, 'pear':2.1}
+
+print(lists_to_dict(['a','b','c'], ['aardvark','bear','coyote'])) 
+# {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
+
+print(combined)
+print(random_element([1,2,3]))
