@@ -28,6 +28,6 @@ change = ['Your change is']
 for d in denomination:
     d_change = total_pennies // denomination[d]
     total_pennies %= denomination[d]
-    change.append(f'{d_change} {d}')
+    change.append(f'{round(d_change)} {d}')
 
 print(', '.join(change))
