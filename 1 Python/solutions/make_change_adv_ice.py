@@ -9,18 +9,25 @@ while True: # input validation
         break # if no error occurs, we break out of the inf loop and continue in our program
     except ValueError: # we catch and print an error message
         print('Please enter a non-negative dollar amount')
-    
-total_dollars = total_pennies // 100
-total_pennies %= 100
-total_quarters = total_pennies // 25
-total_pennies %= 25 
-             # = total_pennies - total_quarters * 25
-total_dimes = total_pennies // 10
-total_pennies %= 10
-total_nickles = total_pennies // 5
-total_pennies %= 5
 
-# change = total // denomination 
-# total %= denomination
+denomination = {
+    'hundreds': 10000,
+    'fifties': 5000,
+    'twenties': 2000,
+    'tens': 1000,
+    'fives': 500,
+    'ones': 100,
+    'quarters': 25,
+    'dimes': 10,
+    'nickles': 5,
+    'pennies': 1
+}
 
-print(f'You have {total_dollars} dollars, {int(total_quarters)} quarters, {int(total_dimes)} dimes, {int(total_nickles)} nickles, and {int(total_pennies)} pennies.')
+change = ['Your change is']
+
+for d in denomination:
+    d_change = total_pennies // denomination[d]
+    total_pennies %= denomination[d]
+    change.append(f'{d_change} {d}')
+
+print(', '.join(change))
