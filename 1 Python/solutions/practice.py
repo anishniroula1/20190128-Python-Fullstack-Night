@@ -78,6 +78,9 @@ def lists_to_dict(keys, values):
     returns dictionary of keys mapped to values
     :keys: list
     :values: list
+
+    >>> lists_to_dict(['a','b','c'], ['aardvark','bear','coyote']) 
+    {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
     """
     # combined = {}
     # for i in range(len(keys)):
@@ -90,13 +93,17 @@ def lists_to_dict(keys, values):
 
     return dict(zip(keys, values))
 
+def average_values(dictionary):
+    """
+    returns the average values in dictionary
+    """
+    # running_sum = 0
+    # for val in dictionary.values():
+    #     running_sum += val
+    # return running_sum/len(dictionary)
 
-fruits = ['apple', 'banana', 'pear']
-prices = [1.2, 3.3, 2.1]
-print(lists_to_dict(fruits, prices)) # -> {'apple':1.2, 'banana':3.3, 'pear':2.1}
+    return round(sum(dictionary.values())/len(dictionary), 2)
 
-print(lists_to_dict(['a','b','c'], ['aardvark','bear','coyote'])) 
-# {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
 
-print(combined)
-print(random_element([1,2,3]))
+fruits = {'apple':1.2, 'banana':3.3, 'pear':2.1}
+print(f'Average price of fruits {list(fruits.keys())} = {average_values(fruits)}')
