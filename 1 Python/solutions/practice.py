@@ -47,18 +47,19 @@ def double_letters(text):
     >>> double_letters('hello')
     'hheelllloo'
     """
-    double = ''
-    for char in text:
-        double += char * 2
-    return double
+    # double = ''
+    # for char in text:
+    #     double += char * 2
+    # return double
 
     # double = []
-    # for item in text:
-    #     double.append(item*2)
+    # for char in text:
+    #     double.append(char*2)
     # return ''.join(double)
 
-    # return ''.join([char*2 for char in text])
+    return ''.join([char*2 for char in text])
 
+print(double_letters('hello'))
 
 def random_element(l):
     """
@@ -69,8 +70,6 @@ def random_element(l):
         index = random_integer(0, len(l)-1)
         return l[index]
     return 'empty list'
-
-combined = 'just a string'
 
 
 def lists_to_dict(keys, values):
@@ -93,9 +92,13 @@ def lists_to_dict(keys, values):
 
     return dict(zip(keys, values))
 
+
 def average_values(dictionary):
     """
     returns the average values in dictionary
+
+    >>> average_values({'apple':1.2, 'banana':3.3, 'pear':2.1})
+    2.2
     """
     # running_sum = 0
     # for val in dictionary.values():
@@ -105,5 +108,26 @@ def average_values(dictionary):
     return round(sum(dictionary.values())/len(dictionary), 2)
 
 
-fruits = {'apple':1.2, 'banana':3.3, 'pear':2.1}
-print(f'Average price of fruits {list(fruits.keys())} = {average_values(fruits)}')
+def eveneven(num_list):
+    """
+    returns true if there is an even number of even numbers in nums
+    :nums: list of ints
+    """
+    # nums = 0
+    # for item in num_list:
+    #     if item % 2 == 0:
+    #         nums += 1
+    # # if nums % 2 == 0:
+    # #     return True 
+    # # else:
+    # #     return False
+    # return nums % 2 == 0
+
+    evens = [num for num in num_list if num % 2 == 0]
+    # print(evens, len(evens))
+    return len(evens) % 2 == 0
+
+
+print(eveneven([5, 6, 2]), 'should =', True)
+print(eveneven([5, 5, 2]), 'should =', False)
+print(eveneven([1,2,3,4,5,6,7,8]), 'should =', True)
