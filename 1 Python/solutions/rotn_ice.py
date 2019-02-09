@@ -37,15 +37,12 @@ def encode(message, n):
     n %= 26 # wrap around 26
     translate = alphabet[n:] + alphabet[:n]
     #         =    right     +    left 
+
+    translate = dict(zip(alphabet, translate))
     encoded = ''
     for char in message:
-        index = alphabet.find(char)
-        if index == -1: # if char is not a letter
-            encoded += char
-        else:
-            encoded += translate[index]
+        encoded += translate.get(char, char)
     return encoded
-
 
 
 def decode(message, n):
@@ -63,6 +60,23 @@ def decode(message, n):
         else:
             encoded += alphabet[index]
     return encoded
+
+
+def cypher(message, n, decode=False):
+    n %= 26 # wrap around 26
+    translate = alphabet[n:] + alphabet[:n]
+    #         =    right     +    left 
+
+    if decode:
+        translate = dict(zip(translate, alphabet))
+    else:
+        # encode logic
+        translate = dict(zip(alphabet, translate))
+
+    coded = ''
+    for char in message:
+        coded += translate.get(char, char)
+    return coded        
 
 
 def main():
@@ -85,16 +99,18 @@ def main():
                 print('Error: enter a number.')
 
         message = input('Enter message to cypher: ')
+
         if operation.startswith('e'):
-            print('-'*60)
-            print('Here is your encoded message: ')
-            print(encode(message, n))
-            print('-'*60)
+            operation = 'encoded'
+            decode = False
         else:
-            print('-'*60)
-            print('Here is your decoded message: ')
-            print(decode(message, n))
-            print('-'*60)            
+            operation = 'decoded'
+            decode = True
+
+        print('-'*60)
+        print(f'Here is your {operation} message: ')
+        print(cypher(message, n, decode))
+        print('-'*60)            
 
         while True: # input validation
             play_again = input('Do you want to play again: ').strip().lower()

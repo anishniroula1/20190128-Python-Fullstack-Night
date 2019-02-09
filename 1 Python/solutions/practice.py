@@ -59,7 +59,6 @@ def double_letters(text):
 
     return ''.join([char*2 for char in text])
 
-print(double_letters('hello'))
 
 def random_element(l):
     """
@@ -112,6 +111,11 @@ def eveneven(num_list):
     """
     returns true if there is an even number of even numbers in nums
     :nums: list of ints
+
+    >>> eveneven([5, 6, 2])
+    True
+    >>> eveneven([5, 5, 2])
+    False
     """
     # nums = 0
     # for item in num_list:
@@ -128,6 +132,27 @@ def eveneven(num_list):
     return len(evens) % 2 == 0
 
 
-print(eveneven([5, 6, 2]), 'should =', True)
-print(eveneven([5, 5, 2]), 'should =', False)
-print(eveneven([1,2,3,4,5,6,7,8]), 'should =', True)
+def powers_of_two(n):
+    """
+    returns list of the first n powers of two
+    """
+    return [2**i for i in range(0, n)]
+
+
+def evens_to_n(n):
+    """
+    returns list of the first n even numbers
+    """
+    return [i*2 for i in range (1,n+1)]
+
+
+def evens_from_n(n):
+    """
+    returns filter of even numbers from 0 to n
+    """
+    return [i for i in range(n) if not i % 2]
+
+
+print(powers_of_two(10))
+print(evens_to_n(10))
+print(evens_from_n(20))
