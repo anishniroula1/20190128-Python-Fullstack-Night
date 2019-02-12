@@ -1,4 +1,4 @@
-# Lab: Knights who say Ni!
+# Lab 0: Knights who say Ni!
 
 ###### Delivery Method: Instructional exercise.
 
