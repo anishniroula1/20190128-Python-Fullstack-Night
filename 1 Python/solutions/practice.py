@@ -168,6 +168,9 @@ def extract_less_than_ten(nums):
     """
     returns list of only numbers less than ten from nums
     :nums: list of numbers
+
+    >>> extract_less_than_ten([2,4,6,8,10,12,14,16,18,20])
+    [2, 4, 6, 8]
     """
     return [i for i in nums if i < 10]
 
@@ -183,6 +186,9 @@ def common_elements(nums1, nums2):
     returns list of common elements in num1 and nums2
     :nums1: list of numbers
     :nums2: list of numbers
+
+    >>> common_elements([1,2,3], [3,4,5])
+    [3]
     """
     # return [n for n in nums1 if n in nums2]
 
@@ -196,11 +202,23 @@ def common_elements(nums1, nums2):
     return list(set(nums1).intersection(set(nums2)))
 
 
-def common_comprehension(nums1, nums2):
+def common_elements_using_comprehension(nums1, nums2):
+    """
+    returns common elements of nums1 and nums2 using comprehension
+
+    >>> common_elements_using_comprehension([1,2,3,4], [3,4,5,6])
+    [3, 4]
+    """
     return [n for n in nums1 if n in nums2]
 
 
-def common_loop(nums1, nums2):
+def common_elements_using_loop(nums1, nums2):
+    """
+    returns common elements of nums1 and nums2 using loop
+
+    >>> common_elements_using_loop([1,2,3,4], [3,4,5,6])
+    [3, 4]
+    """
     common = []
     for n in nums1:
         if n in nums2:
@@ -209,10 +227,22 @@ def common_loop(nums1, nums2):
 
 
 def common_set_intersection(nums1, nums2):
-    return list(set(nums1).intersection(set(nums2)))
+    """
+    returns common elements of nums1 and nums2 using set intersection
+
+    >>> common_set_intersection([1,2,3,4], [3,4,5,6])
+    [3, 4]
+    """
+    return list(set(nums1) & set(nums2))
 
 
 def reverse(l):
+    """
+    reverses list by hand and returns it
+
+    >>> reverse([1,2,3,4,5])
+    [5, 4, 3, 2, 1]
+    """
     r = []
     for i in range(len(l)-1, -1, -1):
         r.append(l[i])
@@ -220,29 +250,41 @@ def reverse(l):
 
 
 def reverse_slice(l):
+    """
+    returns reverse of l using slicing
+
+    >>> reverse_slice([1,2,3,4,5])
+    [5, 4, 3, 2, 1]
+    """
     return l[::-1]
 
 
 def reverse_in_place(l):
+    """
+    reverses l in place and returns l
+
+    >>> reverse_in_place([1,2,3,4,5])
+    [5, 4, 3, 2, 1]
+    """
     l.reverse()
     return l
 
 
-nums = list(range(20))
-nums2 = evens_from_n(40)
+# nums = list(range(20))
+# nums2 = evens_from_n(40)
 # print(nums, extract_less_than_ten(nums))
-start = time.clock()
-print('comprehension:', common_comprehension(nums, nums2), time.clock() - start)
-start = time.clock()
-print('loop:', common_loop(nums, nums2), time.clock() - start)
-start = time.clock()
-print('set:', common_set_intersection(nums, nums2), time.clock() - start)
+# start = time.clock()
+# print('comprehension:', common_elements_using_comprehension(nums, nums2), time.clock() - start)
+# start = time.clock()
+# print('loop:', common_elements_using_loop(nums, nums2), time.clock() - start)
+# start = time.clock()
+# print('set:', common_set_intersection(nums, nums2), time.clock() - start)
 
-start = time.clock()
-print('reverse by hand:', reverse(nums), time.clock() - start)
-start = time.clock()
-print('reverse slice:', reverse_slice(nums), time.clock() - start)
-start = time.clock()
-print('reversed built in:', reversed(nums), time.clock() - start)
-start = time.clock()
-print('reverse built in:', reverse_in_place(nums), time.clock() - start)
+# start = time.clock()
+# print('reverse by hand:', reverse(nums), time.clock() - start)
+# start = time.clock()
+# print('reverse slice:', reverse_slice(nums), time.clock() - start)
+# start = time.clock()
+# print('reversed built in:', reversed(nums), time.clock() - start)
+# start = time.clock()
+# print('reverse built in:', reverse_in_place(nums), time.clock() - start)
