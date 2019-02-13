@@ -288,3 +288,23 @@ def reverse_in_place(l):
 # print('reversed built in:', reversed(nums), time.clock() - start)
 # start = time.clock()
 # print('reverse built in:', reverse_in_place(nums), time.clock() - start)
+
+
+def count_letter(letter, word):
+    """
+    returns the number of letter occurances in a string
+    :letter: str char
+    :word: str
+
+    >>> count_letter('i', 'antidisestablishmentterianism')
+    5
+    >>> count_letter('p', 'pneumonoultramicroscopicsilicovolcanoconiosis')
+    2
+    """
+    # count = 0
+    # for i in word:
+    #     if i == letter:
+    #         count += 1 
+    # return count
+
+    return len([char for char in word if char == letter])
