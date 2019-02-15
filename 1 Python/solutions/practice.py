@@ -308,3 +308,83 @@ def count_letter(letter, word):
     # return count
 
     return len([char for char in word if char == letter])
+
+
+def combine_lists(list1, list2):
+    """
+    returns list of list1 and list2 elements alternating
+
+    >>> combine_lists(['a','b','c'], [1,2,3])
+    ['a', 1, 'b', 2, 'c', 3]
+    """
+    # combined = []
+    # for i, j in zip(list1, list2):
+    #     combined += [i, j]
+    # return combined
+
+    # combined = []
+    # for i in range(len(list1)):
+    #     combined.append(list1[i])
+    #     combined.append(list2[i])
+    # return combined
+
+    return sum([list(i) for i in zip(list1, list2)], [])
+
+
+def find_pair(nums, target):
+    """
+    returns first matching pair of numbers that sum up to the target number
+    :nums: list of numbers
+    :target: target sum
+    :return: list of two numbers that add up to target, or None if no pair found
+
+    >>> find_pair([5, 6, 2, 3], 7)
+    [5, 2]
+
+    O(N^2)
+    """
+    # combos = []
+    # count = 0
+    # for i in nums: # loop N times
+    #     for j in nums: # N times
+    #         if i == j:
+    #             continue
+    #         if i > j:
+    #             break
+    #         count += 1
+    #         print(f'looped {count} times')            
+    #         if i + j == target:
+    #             combos.append([i, j])
+    # return combos
+
+    # nums.sort()
+    # combos = []
+    # count = 0
+    # for i in range(len(nums)-1): # (N/2)
+    #     for j in range(len(nums)-1, 0, -1): # (N/2)
+    #         if i >= j:
+    #             return combos
+    #         count += 1 
+    #         print(f'looped {count} times')            
+    #         if nums[i] + nums[j] == target:
+    #             combos.append([nums[i], nums[j]])
+
+    # return combos
+
+    combos = []
+    count = 0
+    while len(nums) > 1:
+        count += 1
+        print(f'looped {count} times')
+        num = nums[-1]
+        if num < target:
+            difference = target - num
+            if difference in nums:
+                combos.append([num, difference])
+        nums.pop()
+    return combos
+
+
+# print(find_pair([5, 6, 2, 3], 7))
+# print(find_pair([4, 3, 5, 2, 5], 7))
+# print(find_pair([1,2,3,4,5,6,7], 7))
