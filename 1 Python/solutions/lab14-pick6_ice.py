@@ -47,21 +47,22 @@ def calc_payout(ticket, winning):
 
 def play_100k():
     winning = pick6()
-    balance = 0
+    winnings = 0
+    expenses = 0
 
     # loop 100k
     for i in range(100000):
         ticket = pick6()
-        balance -= 2
+        expenses += 2
         payout = calc_payout(winning, ticket)
-        balance += payout
+        winnings += payout
         if payout > 100:
             print('Winner!')
             print(winning)
             print(ticket)
-            print(f'Balance: {balance}, payout: {payout}')
+            print(f'Balance: {winnings-expenses}, Payout: {payout}')
 
-    print(f'Balance: {balance}')
+    print(f'Balance: {winnings-expenses}, ROI: {(winnings-expenses)/expenses}')
 
 
 def run_until_win(payout=50000):
@@ -79,9 +80,9 @@ def run_until_win(payout=50000):
 
 
 def main():
-    for i in range(10):
-        play_100k()
-    # run_until_win(1000000)
+    # for i in range(10):
+    #     play_100k()
+    run_until_win(1000000)
 
 
 if __name__ == '__main__':

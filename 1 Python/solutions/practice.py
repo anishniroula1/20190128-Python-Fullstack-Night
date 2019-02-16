@@ -357,52 +357,54 @@ def find_pair(nums, target):
     # print(f'looped {count} times')            
     # return combos
 
-    nums.sort()
-    combos = []
-    count = 0
-    for i in range(len(nums)-1): # (N)
-        for j in range(len(nums)-1, 0, -1): # (N/2)
-            if i >= j:
-                return combos
-            count += 1 
-            if nums[i] + nums[j] == target:
-                combos.append([nums[i], nums[j]])
-
-    print(f'looped {count} times')            
-    return combos
-
+    # nums.sort()
     # combos = []
     # count = 0
-    # while len(nums) > 1:
-    #     count += 1
-    #     num = nums[-1]
-    #     if num < target:
-    #         difference = target - num
-    #         if difference in nums:
-    #             combos.append([num, difference])
-    #     nums.pop()
-    # print(f'looped {count} times')
+    # for i in range(len(nums)-1): # (N)
+    #     for j in range(len(nums)-1, 0, -1): # (N/2)
+    #         if i >= j:
+    #             return combos
+    #         count += 1 
+    #         if nums[i] + nums[j] == target:
+    #             combos.append([nums[i], nums[j]])
+
+    # print(f'looped {count} times')            
     # return combos
 
-    nums.sort() # O(nlog)
-    seen = {}
+    O(n)
     combos = []
     count = 0
-    for i in range(len(nums)): # O(n)
-        num = nums[i]
-        if num > target:
-            break
-        difference = target - num
-        if difference in nums:
-            index_of_differences = [j for j in range(len(nums)) if nums[j] == difference] # O*n)
-            for j in index_of_differences: # O(m), where m = number of differences in num
-                count += 1
-                if j not in seen.get(i, []): 
-                    seen[j] = seen.get(j, []) + [i]
-                    combos.append([num, difference])
-                    print(f'num={num}, i={i}, j={j}, seen={seen}')
+    while len(nums) > 1: O(n)
+        count += 1
+        num = nums[-1]
+        if num < target:
+            difference = target - num
+            if difference in nums:
+                combos.append([num, difference])
+        nums.pop()
     print(f'looped {count} times')
     return combos
+
+    # # O(nlogn + n(mn)) === O(nlogn + mn^2) === O(n^2)
+    # nums.sort() # O(nlog)
+    # seen = {}
+    # combos = []
+    # count = 0
+    # for i in range(len(nums)): # O(n)
+    #     num = nums[i]
+    #     if num > target:
+    #         break
+    #     difference = target - num
+    #     if difference in nums:
+    #         index_of_differences = [j for j in range(len(nums)) if nums[j] == difference] # O*n)
+    #         for j in index_of_differences: # O(m), where m = number of differences in num
+    #             count += 1
+    #             if j not in seen.get(i, []): 
+    #                 seen[j] = seen.get(j, []) + [i]
+    #                 combos.append([num, difference])
+    #                 print(f'num={num}, i={i}, j={j}, seen={seen}')
+    # print(f'looped {count} times')
+    # return combos
 
 
 # print(find_pair([5, 6, 2, 3], 7))
