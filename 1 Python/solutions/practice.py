@@ -338,8 +338,8 @@ def find_pair(nums, target):
     :target: target sum
     :return: list of two numbers that add up to target, or None if no pair found
 
-    >>> find_pair([5, 6, 2, 3], 7)
-    [5, 2]
+    # >>> find_pair([5, 6, 2, 3], 7)
+    # [5, 2]
 
     """
     # # O(N^2) solution
@@ -371,10 +371,10 @@ def find_pair(nums, target):
     # print(f'looped {count} times')            
     # return combos
 
-    O(n)
+    # O(n)
     combos = []
     count = 0
-    while len(nums) > 1: O(n)
+    while len(nums) > 1: # O(n)
         count += 1
         num = nums[-1]
         if num < target:
@@ -407,6 +407,43 @@ def find_pair(nums, target):
     # return combos
 
 
-# print(find_pair([5, 6, 2, 3], 7))
-print(find_pair([4, 3, 5, 2, 5, 2, 1], 7))
-# print(find_pair([1,2,3,4,5,6,7], 7))
+def merge(list1, list2):
+    """
+    returns list of list1 and list2 zipped
+
+    >>> merge([5,2,1], [6,8,2])
+    [[5, 6], [2, 8], [1, 2]]
+    """
+    # return [list(i) for i in zip(list1, list2)]
+
+    # zipped = []
+    # for i in range(min(len(list1), len(list2))):
+    #     zipped.append([list1[i], list2[i]])
+    # return zipped
+
+    return [[list1[i], list2[i]] for i in range(min(len(list1), len(list2)))]
+
+
+def combine_all(list_of_lists):
+    """
+    returns the list_of_lists flattened 
+
+    >>> combine_all([[5,2,3],[4,5,1],[7,6,3]])
+    [5, 2, 3, 4, 5, 1, 7, 6, 3]
+    """
+    # return sum(list_of_lists, [])
+
+    # combined = []
+    # for sublist in list_of_lists:
+    #     for item in sublist:
+    #         combined.append(item)
+    # return combined
+
+    return [item for sublist in list_of_lists for item in sublist]
+
+    # combined = []
+    # for sublist in list_of_lists:
+    #     combined += sublist
+    #     # combined.extend(sublist) # equiv to above
+    # return combined
+

@@ -19,6 +19,8 @@ def peaks(heights):
         if left < middle > right:
             peaks.append(i)
     return peaks
+    # # or, as a comprehension
+    # return [i for i in range(1, len(heights)-1) if heights[i-1] < heights[i] > heights[i+1]]
 
 
 def valleys(heights):
@@ -33,6 +35,8 @@ def valleys(heights):
         if left > middle < right:
             valleys.append(i)
     return valleys
+   # # or, as a comprehension
+   #  return [i for i in range(1, len(heights)-1) if heights[i-1] > heights[i] < heights[i+1]]
 
 
 def peaks_and_valleys(heights):
