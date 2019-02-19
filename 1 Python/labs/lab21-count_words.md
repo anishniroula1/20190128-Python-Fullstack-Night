@@ -10,9 +10,9 @@ Download it as a UTF-8 text file.
 
 To strip punctuation:
 ```py
-import string
+from string import punctuation
 s = 'I $am a !string with punc&^%*tuation!'
-translator = str.maketrans('', '', string.punctuation)
+translator = str.maketrans('', '', punctuation)
 string_without_punct = s.translate(translator) # I am a string with punctuation
 ```
 
