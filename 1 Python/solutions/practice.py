@@ -447,3 +447,22 @@ def combine_all(list_of_lists):
     #     # combined.extend(sublist) # equiv to above
     # return combined
 
+
+def find_unique(l):
+    """
+    returns list of unique elements from l
+    :l: list
+
+    >>> find_unique([12, 24, 35, 24, 88, 120, 155, 88, 120, 155])
+    [12, 24, 35, 88, 120, 155]
+    """
+    # unique_nums = []
+    # for i in l:
+    #     if i not in unique_nums:
+    #         unique_nums.append(i)
+    # return unique_nums
+
+
+    # return list(set(l))
+    return sorted(list(set(l)))
+

@@ -53,11 +53,11 @@ def draw(heights):
     returns string representation of mountain
     """
     mountain = []
-    peak = max(heights)
-    while peak > 0:
-        row = ['X' if height >= peak else ' ' for height in heights]
+    current_height = max(heights)
+    while current_height > 0:
+        row = ['X' if height >= current_height else ' ' for height in heights]
         mountain.append(''.join(row))
-        peak -= 1
+        current_height -= 1
     return '\n'.join(mountain)
 
 
@@ -69,7 +69,6 @@ def draw_water(heights):
     mountain = []                               # initialize mountain with no rows
     current_height = max(heights)               # initialize current height as highest height
     water_height = 0                            # initialize water height to 0
-    current_peak_idx = 0                        # initialize current peak to 0
 
     while current_height > 0:                   # loop over every row of our mountain
         row = []
@@ -80,10 +79,7 @@ def draw_water(heights):
                     peak_idx = p.index(i)
                     next_peak_idx = p[peak_idx + 1]
                     # set the water height to the shorter peak height
-                    if heights[i] < heights[next_peak_idx]:
-                        water_height = heights[i]
-                    else:
-                        water_height = heights[next_peak_idx]
+                    water_height = min(heights[i], heights[next_peak_idx])
 
             height = heights[i]
             if height >= current_height:        # if this height >= current_height 
@@ -98,7 +94,6 @@ def draw_water(heights):
                         row.append(' ')
                 else: # draw blank
                     row.append(' ')
-
 
         mountain.append(''.join(row))
         current_height -= 1
