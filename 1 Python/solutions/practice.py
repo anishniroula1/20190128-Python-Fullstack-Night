@@ -462,7 +462,36 @@ def find_unique(l):
     #         unique_nums.append(i)
     # return unique_nums
 
-
     # return list(set(l))
     return sorted(list(set(l)))
 
+
+def average_values(dictionary):
+    """
+    returns average values for keys that start with the same letter
+
+    >>> average_values({'a1':4, 'a2':2, 'a3':3, 'b1':10, 'b2':1, 'b3':1, 'c1':4, 'c2':5, 'c3':6})
+    {'a': 3.0, 'b': 4.0, 'c': 5.0}
+    """
+    running_sum = {}
+
+    for k, v in dictionary.items():
+        if k[0] in running_sum:
+            current_sum, count = running_sum[k[0]]
+            running_sum[k[0]] = (current_sum + v, count + 1)
+        else:
+            running_sum[k[0]] = (v, 1)
+
+        # # equivalent to above
+        # current_sum, count = running_sum.get(k[0], (0, 0))
+        # running_sum[k[0]] = (current_sum + v, count + 1) 
+
+    # averages = {}
+    # for key in running_sum:
+    #     rsum, count = running_sum[key]
+    #     averages[key] = rsum/count
+    # return averages
+    
+    # equivalent to loop above
+    return {key: rsum/count for (key, (rsum, count)) in running_sum.items()}
+    # return {key: val[0]/val[1] for (key, val) in running_sum.items()}
