@@ -1,6 +1,7 @@
 """
 Lab 23: Contact List
 Manage a contact list and save to CSV file with a CRUD REPL interface
+Contact list as dictionary of dictionaries implementation
 """
 
 def load(csv):
@@ -27,17 +28,11 @@ def create(contact_list, contact):
     :contact_list: dict : dict of contacts
     :contact: dict : individual contact information
     """
-    if type(read(contact_list, contact['name'])) is dict:
+    if contact_list.get(contact['name']):
         return f"Error: {contact['name']} already exists."
 
     contact_list[contact['name']] = contact
     return f"Created contact for {contact['name']}."
-
-
-# def find_contact(contact_list, name):
-#     for i in range(contact_list):
-#         if contact_list[i]['name'] == name:
-#             return i
 
 
 def read(contact_list, name):
@@ -47,11 +42,6 @@ def read(contact_list, name):
     :name: str : name of contact    
     """
     return contact_list.get(name, f'Error: {name} does not exist.')
-    # index = find_contact(contact_list, name)
-    # if index:
-    #     return contact_list[i]
-    # else:
-    #     return 'Contact not found'
 
 
 def update(contact_list, name, updated_info):
@@ -79,20 +69,37 @@ def delete(contact_list, name):
     return f'Error: {name} does not exist.'
 
 
+def print_contact(contact):
+    """
+    pretty prints single contact
+    """
+    if type(contact) is dict:
+        for k, v in contact.items():
+            print(f'{k}: {v}')
+    else:
+        print(contact)
+
 def list_all(contact_list):
     """
     pretty prints all contacts
     """
     for contact in contact_list:
-        for k, v in contact_list[contact].items():
-            print(f'{k}: {v}')
+        print_contact(contact_list[contact])
         print()
 
 
 if __name__ == '__main__':
     contacts, props = load('contact_list.csv')
     loop = True
-    valid_inputs = ['c', 'r', 'u', 'd', 'e', 'x', 'h']
+    valid_inputs = [
+        'c', 'create',
+        'r', 'read',
+        'u', 'update',
+        'd', 'delete',
+        'e', 'list', 'ls',
+        'x', 'exit', 'quit',
+        'h', 'help'
+    ]
     commands = """ 
         Commands: 
         (c)reate 
@@ -103,8 +110,10 @@ if __name__ == '__main__':
         e(x)it
         (h)elp
     """
+
     print('Welcome to your contact list')
     print(commands)
+
     while loop:
         print('-'*60)
         while True:
@@ -114,9 +123,15 @@ if __name__ == '__main__':
             print('Invalid input.')
             print(commands)
 
-        if cmd == 'x':
+        if cmd in ['x', 'exit', 'quit']:
             loop = False
             print('Goodbye!')
+
+        elif cmd in ['e', 'list', 'ls']:
+            list_all(contacts)
+
+        elif cmd in ['h', 'help']:
+            print(commands)
 
         elif cmd.startswith('c'):
             contact = {}
@@ -125,11 +140,12 @@ if __name__ == '__main__':
             print(create(contacts, contact))
 
         elif cmd.startswith('r'):
-            name = input('Name: ')
-            print(read(contacts, name))
+            name = input('name: ')
+            contact = read(contacts, name)
+            print_contact(contact)
 
         elif cmd.startswith('u'):
-            name = input('Name: ')            
+            name = input('name: ')
             contact = {}
             for prop in props:
                 val = input(f'{prop}: ')
@@ -138,14 +154,8 @@ if __name__ == '__main__':
             print(update(contacts, name, contact))
 
         elif cmd.startswith('d'):
-            name = input('Name: ')
+            name = input('name: ')
             print(delete(contacts, name))
-
-        elif cmd == 'e':
-            list_all(contacts)
-
-        else: # cmd == 'h'
-            print(commands)
 
 
 
