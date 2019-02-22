@@ -1,8 +1,14 @@
 # 20190128-Python-FullStack-Night
 Repo for the PDX Code Guild Python Full Stack night course starting 01/28/2019
 
-Class is held from **January 28, 2019 - May 24, 2019**
+Class is held from **January 28, 2019 - ~~May 24, 2019~~ May 27th**
+
 M-F 6:00PM – 9:30PM
+
+## No class the following dates
+- **Wednesday, March 6th**
+- **Thursday, March 7th**
+- **Friday, March 8th**
 
 ## Labs Assigned
 *Optional labs are in parentheses*
@@ -27,6 +33,9 @@ M-F 6:00PM – 9:30PM
 - Eunika Wu
     - eunika@pdxcodeguild.com
     - 724-472-8294
+    
+- Zack Kollar
+    - zack@pdxcodeguild.com
     
 - Remington Henderson (TA)
     
