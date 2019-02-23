@@ -4,6 +4,7 @@ Manage a contact list and save to CSV file with a CRUD REPL interface
 Contact list as dictionary of dictionaries implementation
 """
 
+
 def load(csv):
     """
     reads csv file and parses it into a dictionary of dictionaries
@@ -11,15 +12,32 @@ def load(csv):
     """
     with open(csv) as f:
         lines = f.read().split('\n')
-    
+
     contact_list = {}
     props = lines[0].split(',')
     for i in range(1, len(lines)):
         row = lines[i].split(',')
         contact = dict(zip(props, row))
         contact_list[contact['name']] = contact
-    
+
     return (contact_list, props)
+
+
+def save(contact_list, props, csv):
+    """
+    writes contact_list as csv file
+    :contact_list: dict : dict of contacts
+    :csv: str : file path of csv
+    """
+    contacts = [','.join(props)]
+    for name in contact_list:
+        contact = contact_list[name]
+        contacts.append(','.join(contact.values()))
+
+    with open(csv, 'w') as f:
+        f.write('\n'.join(contacts))
+
+    return f'Saving contacts as {csv}...'
 
 
 def create(contact_list, contact):
@@ -39,7 +57,7 @@ def read(contact_list, name):
     """
     returns contact with matching name
     :contact_list: dict : dict of contacts
-    :name: str : name of contact    
+    :name: str : name of contact
     """
     return contact_list.get(name, f'Error: {name} does not exist.')
 
@@ -61,7 +79,7 @@ def delete(contact_list, name):
     """
     deletes contact with matching name
     :contact_list: dict : dict of contacts
-    :name: str : name of contact    
+    :name: str : name of contact
     """
     if contact_list.get(name):
         del contact_list[name]
@@ -78,6 +96,7 @@ def print_contact(contact):
             print(f'{k}: {v}')
     else:
         print(contact)
+
 
 def list_all(contact_list):
     """
@@ -100,11 +119,11 @@ if __name__ == '__main__':
         'x', 'exit', 'quit',
         'h', 'help'
     ]
-    commands = """ 
-        Commands: 
-        (c)reate 
-        (r)ead 
-        (u)pdate 
+    commands = """
+        Commands:
+        (c)reate
+        (r)ead
+        (u)pdate
         (d)elete
         (e)xpand list
         e(x)it
@@ -116,14 +135,19 @@ if __name__ == '__main__':
 
     while loop:
         print('-'*60)
-        while True:
+        valid = False
+
+        while not valid:
             cmd = input('> ').strip().lower()
             if cmd in valid_inputs:
-                break
-            print('Invalid input.')
-            print(commands)
+                valid = True
+            else:
+                print('Invalid input.')
+                print(commands)
 
         if cmd in ['x', 'exit', 'quit']:
+            # save contacts as csv
+            print(save(contacts, props, 'contact_list.csv'))
             loop = False
             print('Goodbye!')
 
@@ -156,6 +180,3 @@ if __name__ == '__main__':
         elif cmd.startswith('d'):
             name = input('name: ')
             print(delete(contacts, name))
-
-
-
