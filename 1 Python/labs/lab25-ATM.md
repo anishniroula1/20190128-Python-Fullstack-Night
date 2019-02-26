@@ -6,7 +6,7 @@ Let's represent an ATM with a class containing a balance property. A newly creat
 - `check_balance()` returns the account balance
 - `deposit(amount)` deposits the given amount in the account
 - `check_withdrawal(amount)` returns true if the withdrawn amount won't put the account in the negative
-- `withdraw(amount)` withdraws the amount from the account and returns it
+- `withdraw(amount)` withdraws the amount from the account and returns balance
 
 ## Version 2
 
