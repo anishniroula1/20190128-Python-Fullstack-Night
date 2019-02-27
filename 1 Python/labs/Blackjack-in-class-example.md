@@ -1,10 +1,12 @@
 # Blackjack
 
-Let's start modeling a game of [blackjack](https://en.wikipedia.org/wiki/Blackjack).
+Let's start modeling a game of [Blackjack](https://en.wikipedia.org/wiki/Blackjack).
 
-`Card` class with a suit and a rank
-`Deck` class with a collection of cards
-`Hand` class with a collection of cards from a deck.
+- `Card` class with a suit and a rank
+- `Deck` class with a collection of cards
+- `Hand` class with a collection of cards from a deck.
+- `Dealer` class that extends `Hand`
+- `Game` class that contains the REPL and game logic for Blackjack
 
 Use multiple modules.
 
@@ -35,7 +37,8 @@ An ace is worth 1 when the hand it's a part of would be over 21 if it was worth 
 
 ## Advanced
 
-*   Bring in your dealer hitting logic from the [21 practice problem](/practice/21.md) into a top-level function it's own module `dealer`.
+*   Bring in your dealer hitting logic from the [blackjack advice lab](./lab19-blackjack_advice.md) 
+    into a `Dealer` class.
     Update it to take in a `Hand` instance and return whether to hit.
 
 *   Add a "card counting assistant" function in a module `advisor`.
