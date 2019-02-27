@@ -77,29 +77,3 @@ class Deck:
         pops card off top of deck
         """
         return self.cards.pop()        
-
-
-deck = Deck()
-print(len(deck))
-card1 = deck.cards[0]
-card2 = deck.cards[1]
-card3 = deck.cards[13]
-card4 = card1
-card5 = Card('A', 'Clubs')
-print(card1, '=', card2, card1 == card2)
-print(card1, '!=', card2, card1 != card2)
-print(card1, '=', card3, card1 == card3)
-print(card1, '!=', card3, card1 != card3)
-print(card1, '==', card4, card1 == card4)
-print(card1, '==', card5, card1 == card5)
-print(card1.points)
-print(Card(2, 'Clubs').points)
-print(Card(9, 'Clubs').points)
-print(Card('J', 'Hearts').points)
-print(Card('Q', 'Hearts').points)
-print(Card('K', 'Hearts').points)
-print(deck[-1])
-deck.shuffle()
-deck2 = Deck()
-deck2.cut(150)
-print(deck2)
