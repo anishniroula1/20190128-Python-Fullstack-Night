@@ -9,9 +9,8 @@ class Card:
     """
     Card represented by suit and rank
     """
-
     def __init__(self, rank, suit):
-        points = {'A': 1}
+        points = {'A': 11}
         nums = dict(zip(range(2,11), range(2,11)))
         face = {k: 10 for k in 'JQK'} 
         points.update(nums)
@@ -76,4 +75,4 @@ class Deck:
         """
         pops card off top of deck
         """
-        return self.cards.pop()        
+        return self.cards.pop()
