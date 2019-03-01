@@ -24,10 +24,10 @@ class Card:
         return f'Card({self.rank} of {self.suit})'
 
     def __eq__(self, card):
-        return self.rank == card.rank
+        return self.rank == card.rank and self.suit == card.suit
 
     def __ne__(self, card):
-        return self.rank != card.rank
+        return self.rank != card.rank and self.suit != card.suit
 
 
 class Deck:
@@ -55,6 +55,12 @@ class Deck:
 
     def __getitem__(self, index):
         return self.cards[index]
+
+    def __iter__(self):
+        return iter(self.cards)
+
+    def __contains__(self, card):
+        return card in self.cards
 
     # def __add__(self, deck):
     #     return self.cards + deck.cards
