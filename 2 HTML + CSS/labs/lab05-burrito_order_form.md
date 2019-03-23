@@ -28,6 +28,8 @@ Additional Ingredients (check boxes)
 - Cheese
 - Sour Cream
 
+### Extra Credit
+
 For personal info, use the `required`, `pattern` and `title` attributes of the input fields to verify that the information the user entered is legitimate.
 
 Personal Info
