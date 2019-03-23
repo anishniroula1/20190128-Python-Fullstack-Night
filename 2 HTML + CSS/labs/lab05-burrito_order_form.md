@@ -4,6 +4,8 @@
 
 Create a burrito order form with the following input controls. Try to incorporate some images and semantic elements. Below are some recommended fields, feel free to use your own. You should include all elements in a `form`, and use `fieldset`s. You may draw some inspiration from [this image](burrito-order-form.png).
 
+Use codepen and set the form method to `POST` to make sure all the relevant data is being sent to the server.
+
 Tortilla (radio buttons)
 - White Flour
 - Wheat Flour
@@ -42,5 +44,3 @@ Personal Info
 - Social Security Number: (e.g. 415-25-2627)
 - Street (e.g. 123 Mulberry Ln)
 - City, State, Zip (e.g. Portland, OR, 97201)
-
-Once you have your page together, add the attributes `action="https://requestb.in/u96nubu9"` and `method="post"` to your form. Then fill out your form and submit the data. You should see an "ok" response. You can then go [here](https://requestb.in/u96nubu9?inspect) and look at the request's body. Make sure all the relevant data is present to ensure your form is working.
