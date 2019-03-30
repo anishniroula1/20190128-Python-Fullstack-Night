@@ -49,3 +49,33 @@ function extract_less_than_ten_using_loop(nums) {
 }
 
 extract_less_than_ten_named_function([1,3,5,7,11,13,15]) // [1, 3, 5, 7, 9]
+
+
+// Strings 1
+//  returns string of each letter in text doubled
+
+// >>> double_letters('hello')
+// 'hheelllloo'
+
+// using loops
+function double_letters_using_loops(text){
+    let double_string = ''
+    for (let i=0; i<text.length; i++) {
+        double_string += text[i] + text[i]
+    }
+    return double_string
+}
+
+// equivalent to above
+function double_letters_using_loops(text){
+    let double_string = ''
+    for (let letter of text) {
+        double_string += letter + letter
+    }
+    return double_string
+}
+
+// using map
+const double_letters_using_map = (text) => (text.split('')
+                                                .map(letter => letter + letter)
+                                                .join(''))
