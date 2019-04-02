@@ -1,0 +1,117 @@
+.container {
+    display: grid;
+    font-family: Orbitron;
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: repeat(6, 40px);
+    gap: 5px;
+    grid-template-areas: 
+        "display    display     display     display"
+        "ac         ce          multiply    divide"
+        "seven      eight       nine        plus"
+        "four       five        six         minus"
+        "one        two         three       equal"
+        "zero       zero        decimal     equal "
+}
+.btn {
+    outline: solid;
+    outline-width: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.clear {
+    background-color: darkred;
+}
+
+.num {
+    background-color: black;
+}
+
+.op {
+    background-color: darkgrey;
+}
+
+.btn:hover {
+
+}
+
+#display {
+    outline: solid;
+    outline-width: 1px;    
+    grid-area: display;
+}
+
+#AC {
+    grid-area: ac;
+}
+
+#CE {
+    grid-area: ce;
+}
+
+#add {
+    grid-area: plus;
+}
+
+#sub {
+    grid-area: minus;
+}
+
+#mult {
+    grid-area: multiply;
+}
+
+#divide {
+    grid-area: divide;
+}
+
+#eq {
+    grid-area: equal;
+}
+
+#dec {
+    grid-area: decimal;
+}
+
+#zero {
+    grid-area: zero;
+}
+
+#one {
+    grid-area: one;
+}
+
+#two {
+    grid-area: two;
+}
+
+#three {
+    grid-area: three;
+}
+
+#four {
+    grid-area: four;
+}
+
+#five {
+    grid-area: five;
+}
+
+#six {
+    grid-area: six;
+}
+
+#seven {
+    grid-area: seven;
+}
+
+#eight {
+    grid-area: eight;
+}
+
+#nine {
+    grid-area: nine;
+}
+
