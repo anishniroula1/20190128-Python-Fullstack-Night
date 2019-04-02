@@ -76,6 +76,7 @@
 }
 
 #dec {
+    background-color: black;
     grid-area: decimal;
 }
 

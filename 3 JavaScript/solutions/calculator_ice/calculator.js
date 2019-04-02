@@ -1,4 +1,6 @@
 // calculator.js
+
+// DOM selectors 
 const displayDiv = document.querySelector('#display')
 const acDiv = document.querySelector('#AC')
 const ceDiv = document.querySelector('#CE')
@@ -18,6 +20,7 @@ const sevenDiv = document.querySelector('#seven')
 const eightDiv = document.querySelector('#eight')
 const nineDiv = document.querySelector('#nine')
 const zeroDiv = document.querySelector('#zero')
+const digits = document.querySelectorAll('.num')
 
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
@@ -28,9 +31,34 @@ const updateDisplay = (value) => {
 }
 
 let running_total = 0
-let current_value = 0
+let current_value = ''
+let decimal = false
+
 updateDisplay(running_total)
 
-acDiv.addEventListener('click', (evt) => {
-  console.log(evt)
+acDiv.addEventListener('click', () => {
+  running_total = 0
+  current_value = 0
+  updateDisplay(running_total)
+})
+
+ceDiv.addEventListener('click', () => {
+  current_value = 0
+  updateDisplay(running_total)
+})
+
+digits.forEach(elem => {
+  let digit = elem.innerText
+  elem.addEventListener('click', () => {
+    current_value += digit
+    updateDisplay(current_value)
+  })
+})
+
+decDiv.addEventListener('click', () => {
+  if (!decimal) {
+    current_value += '.'
+    updateDisplay(current_value)
+    decimal = true  
+  }
 })
