@@ -79,3 +79,21 @@ function double_letters_using_loops(text){
 const double_letters_using_map = (text) => (text.split('')
                                                 .map(letter => letter + letter)
                                                 .join(''))
+
+
+// List 6 common elements
+// using filter
+const common_elements = (arr1, arr2) => arr1.filter(x => arr2.includes(x))
+
+// equivalent to above
+function common_elements(arr1, arr2) {
+    return arr1.filter(x => arr2.includes(x))
+}
+
+// using sets
+const common_elements_using_sets = (arr1, arr2) => {
+    const setA = new Set(arr1)
+    const setB = new Set(arr2)
+    const intersection = [...setA].filter(elem => setB.has(elem))
+    return intersection
+}
