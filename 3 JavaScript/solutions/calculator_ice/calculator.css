@@ -29,11 +29,11 @@
     background-color: darkred;
 }
 
-.num {
+.num, #dec {
     background-color: black;
 }
 
-.op {
+.op, #eq {
     background-color: darkgrey;
 }
 
@@ -76,7 +76,6 @@
 }
 
 #dec {
-    background-color: black;
     grid-area: decimal;
 }
 

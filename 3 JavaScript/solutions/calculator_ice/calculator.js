@@ -4,23 +4,10 @@
 const displayDiv = document.querySelector('#display')
 const acDiv = document.querySelector('#AC')
 const ceDiv = document.querySelector('#CE')
-const multDiv = document.querySelector('#mult')
-const divideDiv = document.querySelector('#divide')
-const addDiv = document.querySelector('#add')
-const subDiv = document.querySelector('#sub')
 const eqDiv = document.querySelector('#eq')
 const decDiv = document.querySelector('#dec')
-const oneDiv = document.querySelector('#one')
-const twoDiv = document.querySelector('#two')
-const threeDiv = document.querySelector('#three')
-const fourDiv = document.querySelector('#four')
-const fiveDiv = document.querySelector('#five')
-const sixDiv = document.querySelector('#six')
-const sevenDiv = document.querySelector('#seven')
-const eightDiv = document.querySelector('#eight')
-const nineDiv = document.querySelector('#nine')
-const zeroDiv = document.querySelector('#zero')
 const digits = document.querySelectorAll('.num')
+const ops = document.querySelectorAll('.op')
 
 const add = (a, b) => a + b
 const subtract = (a, b) => a - b
@@ -33,6 +20,7 @@ const updateDisplay = (value) => {
 let running_total = 0
 let current_value = ''
 let decimal = false
+let operator = null
 
 updateDisplay(running_total)
 
@@ -61,4 +49,30 @@ decDiv.addEventListener('click', () => {
     updateDisplay(current_value)
     decimal = true  
   }
+})
+
+ops.forEach(elem => {
+  let op = elem.id
+  elem.addEventListener('click', () => {
+    operator = op
+    running_total = current_value
+    current_value = ''
+    updateDisplay(current_value)
+  })
+})
+
+eqDiv.addEventListener('click', () => {
+  let a = parseFloat(running_total)
+  let b = parseFloat(current_value)
+  if (operator === 'add') {
+    running_total = add(a, b)
+  } else if (operator === 'sub') {
+    running_total = subtract(a, b)
+  } else if (operator === 'mult') {
+    running_total = multiply(a, b)
+  } else if (operator === 'divide') {
+    running_total = divide(a, b)
+  }  
+  current_value = ''
+  updateDisplay(running_total)
 })
