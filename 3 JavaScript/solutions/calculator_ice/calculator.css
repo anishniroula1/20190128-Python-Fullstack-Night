@@ -21,6 +21,10 @@
     color: white;
 }
 
+.btn:hover {
+    opacity: 0.8;
+}
+
 .clear {
     background-color: darkred;
 }
