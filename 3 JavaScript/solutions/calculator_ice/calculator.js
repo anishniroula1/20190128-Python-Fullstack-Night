@@ -54,8 +54,10 @@ decDiv.addEventListener('click', () => {
 ops.forEach(elem => {
   let op = elem.id
   elem.addEventListener('click', () => {
+    if (operator === null) {
+      running_total = current_value
+    }
     operator = op
-    running_total = current_value
     current_value = ''
     updateDisplay(current_value)
   })
