@@ -97,3 +97,21 @@ const common_elements_using_sets = (arr1, arr2) => {
     const intersection = [...setA].filter(elem => setB.has(elem))
     return intersection
 }
+
+// Fundamentals 4
+// Write a function that returns the maximum of 3 parameters.
+// (Hint: use Array.reduce() )
+// function maximum_of_three(a, b, c) {...}
+//     ...
+// maximum_of_three(5,6,2) → 6
+// maximum_of_three(-4,3,10) → 10
+
+let max_of_three = (a, b, c) => [a, b, c].reduce((acc, cur) => (acc > cur ? acc : cur))
+max_of_three = (a, b, c) => Math.max(a, b, c)
+max_of_three = (a, b, c) => {
+    let running_max = -Infinity
+    for (let num of [a, b, c]) {
+        if (num > running_max) running_max = num
+    }
+    return running_max
+}
