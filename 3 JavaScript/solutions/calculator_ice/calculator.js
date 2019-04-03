@@ -67,6 +67,7 @@ const addOp = (op) => {
     }
     operator = op
     current_value = ''
+    decimal = false
     updateDisplay(operator)
 }
 
