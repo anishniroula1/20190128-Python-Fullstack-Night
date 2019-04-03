@@ -25,17 +25,20 @@ const updateDisplay = (value) => {
   displayDiv.innerText = value
 }
 
+// py: input in list
+// js: arr.includes(input)
+
 const calculate = () => {
   if (current_value) {
     let a = parseFloat(running_total)
     let b = parseFloat(current_value)
-    if (operator === 'add') {
+    if (operator === 'add' || operator === '+') {
       running_total = add(a, b)
-    } else if (operator === 'sub') {
+    } else if (operator === 'sub' || operator === '-') {
       running_total = subtract(a, b)
-    } else if (operator === 'mult') {
+    } else if (operator === 'mult' || operator === '*') {
       running_total = multiply(a, b)
-    } else if (operator === 'divide') {
+    } else if (operator === 'divide' || operator === '/') {
       running_total = divide(a, b)
     }  
     current_value = ''
@@ -58,27 +61,33 @@ const addDecimal = () => {
 
 const addOp = (op) => {
     if (operator === null) {
-      running_total = current_value
+      running_total = (current_value ? current_value : 0)
     } else {
       calculate()
     }
     operator = op
-    current_value = ''  
+    current_value = ''
+    updateDisplay(operator)
+}
+
+const clearEntry = () => {
+  current_value = ''
+  updateDisplay(running_total)  
 }
 
 // display 0 at first
 updateDisplay(running_total)
 
+// calculator button event listeners
 acDiv.addEventListener('click', () => {
   running_total = 0
-  current_value = 0
+  current_value = ''
   operator = null
   updateDisplay(running_total)
 })
 
 ceDiv.addEventListener('click', () => {
-  current_value = 0
-  updateDisplay(running_total)
+  clearEntry()
 })
 
 digits.forEach(elem => {
@@ -101,4 +110,19 @@ ops.forEach(elem => {
 
 eqDiv.addEventListener('click', () => {
   calculate()
+})
+
+// keypress event listener
+document.addEventListener('keydown', (evt) => {
+  if (!isNaN(evt.key)) { // key is digit
+    addDigit(evt.key)
+  } else if ('+-/*'.includes(evt.key)) { // key is operator
+    addOp(evt.key)
+  } else if (evt.key === '.') { // key is decimal
+    addDecimal()
+  } else if (evt.key === "Enter" || evt.key === '=') { // key is equal
+    calculate()
+  } else if (evt.key === "Backspace") {
+    clearEntry()
+  }
 })
