@@ -37,13 +37,11 @@
     background-color: darkgrey;
 }
 
-.btn:hover {
-
-}
-
 #display {
     outline: solid;
-    outline-width: 1px;    
+    outline-width: 1px;
+    font-size: xx-large;
+    text-align: right;  
     grid-area: display;
 }
 

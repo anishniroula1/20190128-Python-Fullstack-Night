@@ -20,9 +20,11 @@ const add = (a, b) => a + b
 const subtract = (a, b) => a - b
 const multiply = (a, b) => a * b
 const divide = (a, b) => a / b
+
 const updateDisplay = (value) => {
   displayDiv.innerText = value
 }
+
 const calculate = () => {
   if (current_value) {
     let a = parseFloat(running_total)
@@ -39,6 +41,29 @@ const calculate = () => {
     current_value = ''
   }
   updateDisplay(running_total)  
+}
+
+const addDigit = (digit) => {
+    current_value += digit
+    updateDisplay(current_value)  
+}
+
+const addDecimal = () => {
+  if (!decimal) {
+    current_value += '.'
+    updateDisplay(current_value)
+    decimal = true  
+  }  
+}
+
+const addOp = (op) => {
+    if (operator === null) {
+      running_total = current_value
+    } else {
+      calculate()
+    }
+    operator = op
+    current_value = ''  
 }
 
 // display 0 at first
@@ -59,30 +84,18 @@ ceDiv.addEventListener('click', () => {
 digits.forEach(elem => {
   let digit = elem.innerText
   elem.addEventListener('click', () => {
-    current_value += digit
-    updateDisplay(current_value)
+    addDigit(digit)
   })
 })
 
 decDiv.addEventListener('click', () => {
-  if (!decimal) {
-    current_value += '.'
-    updateDisplay(current_value)
-    decimal = true  
-  }
+  addDecimal()
 })
 
 ops.forEach(elem => {
   let op = elem.id
   elem.addEventListener('click', () => {
-    if (operator === null) {
-      running_total = current_value
-    } else {
-      calculate()
-    }
-    operator = op
-    current_value = ''
-    // updateDisplay(current_value)
+    addOp(op)
   })
 })
 
