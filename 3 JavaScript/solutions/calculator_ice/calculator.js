@@ -72,6 +72,7 @@ const addOp = (op) => {
 
 const clearEntry = () => {
   current_value = ''
+  decimal = false
   updateDisplay(running_total)  
 }
 
@@ -83,6 +84,7 @@ acDiv.addEventListener('click', () => {
   running_total = 0
   current_value = ''
   operator = null
+  decimal = false
   updateDisplay(running_total)
 })
 
