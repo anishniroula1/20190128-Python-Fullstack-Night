@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     display: grid;
+    background: #e9ffef;
 }
 
 .container {
@@ -12,10 +13,11 @@ body, html {
     border-radius: 15px;
     box-shadow: 3px 5px rgba(0, 0, 0, 0.5), inset -2px -3px 10px 2px rgba(0, 0, 0, 0.15);    
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
     gap: 4%;
     grid-template-areas: 
         "title      title       title       title"
+        "display    display     display     display"
         "display    display     display     display"
         "display    display     display     display"
         "ac         ce          multiply    divide"
@@ -73,14 +75,21 @@ body, html {
     padding-left: 15px;
 }
 
-#display {
+#output {
     margin: 5px 0 10px 0;
-    font-size: xx-large;
     text-align: right;  
     background: #d4d4aa;
     box-shadow: 0 0, inset -1px -3px 10px 2px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     grid-area: display;    
+}
+
+#display {
+    font-size: xx-large;
+}
+
+#history {
+    font-size: medium;
 }
 
 #AC {

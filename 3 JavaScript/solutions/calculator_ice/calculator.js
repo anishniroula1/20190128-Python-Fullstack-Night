@@ -2,6 +2,7 @@
 
 // DOM selectors 
 const displayDiv = document.querySelector('#display')
+const historyDiv = document.querySelector('#history')
 const acDiv = document.querySelector('#AC')
 const ceDiv = document.querySelector('#CE')
 const eqDiv = document.querySelector('#eq')
@@ -10,10 +11,12 @@ const digits = document.querySelectorAll('.num')
 const ops = document.querySelectorAll('.op')
 
 // variables
-let running_total = 0
-let current_value = ''
+let runningTotal = 0
+let currentValue = ''
 let decimal = false
+let negative = false
 let operator = null
+let history = []
 
 // functions
 const add = (a, b) => a + b
@@ -23,70 +26,75 @@ const divide = (a, b) => a / b
 
 const updateDisplay = (value) => {
   displayDiv.innerText = value
+  historyDiv.innerText = history.join('')
 }
 
 // py: input in list
 // js: arr.includes(input)
 
 const calculate = () => {
-  if (current_value) {
-    let a = parseFloat(running_total)
-    let b = parseFloat(current_value)
+  if (currentValue) {
+    history.push(currentValue)
+    let a = parseFloat(runningTotal)
+    let b = parseFloat(currentValue)
     if (operator === '+') {
-      running_total = add(a, b)
+      runningTotal = add(a, b)
     } else if (operator === '-') {
-      running_total = subtract(a, b)
+      runningTotal = subtract(a, b)
     } else if (operator === '×' || operator === '*') {
-      running_total = multiply(a, b)
+      runningTotal = multiply(a, b)
     } else if (operator === '÷' || operator === '/') {
-      running_total = divide(a, b)
+      runningTotal = divide(a, b)
     }  
-    current_value = ''
+    currentValue = ''
   }
-  updateDisplay(running_total)  
+  updateDisplay(runningTotal)  
 }
 
 const addDigit = (digit) => {
-    current_value += digit
-    updateDisplay(current_value)  
+    currentValue += digit
+    updateDisplay(currentValue)  
 }
 
 const addDecimal = () => {
   if (!decimal) {
-    current_value += '.'
-    updateDisplay(current_value)
+    currentValue += '.'
+    updateDisplay(currentValue)
     decimal = true  
   }  
 }
 
 const addOp = (op) => {
-    if (operator === null) {
-      running_total = (current_value ? current_value : 0)
+    if (operator === null) { 
+      runningTotal = (currentValue ? currentValue : 0)
+      history.push(runningTotal)
     } else {
       calculate()
     }
     operator = op
-    current_value = ''
+    history.push(op)
+    currentValue = ''
     decimal = false
     updateDisplay(operator)
 }
 
 const clearEntry = () => {
-  current_value = ''
+  currentValue = ''
   decimal = false
-  updateDisplay(running_total)  
+  updateDisplay(runningTotal)  
 }
 
 // display 0 at first
-updateDisplay(running_total)
+updateDisplay(runningTotal)
 
 // calculator button event listeners
 acDiv.addEventListener('click', () => {
-  running_total = 0
-  current_value = ''
+  runningTotal = 0
+  currentValue = ''
   operator = null
   decimal = false
-  updateDisplay(running_total)
+  history = []
+  updateDisplay(runningTotal)
 })
 
 ceDiv.addEventListener('click', () => {
