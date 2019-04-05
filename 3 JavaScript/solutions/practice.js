@@ -115,3 +115,37 @@ max_of_three = (a, b, c) => {
     }
     return running_max
 }
+
+
+// Lists 12
+// Write a function that takes n as a parameter, and returns a list containing the first n Fibonacci Numbers.
+
+// fibonacciList(8) → [0, 1, 1, 2, 3, 5, 8, 13, 21]
+const fibonacci = (n) => (n <= 1 ? n : fibonacci(n-1) + fibonacci(n-2))
+const fibonacciList = (n) => [...Array(n+1).keys()].map(i => fibonacci(i))
+
+// // equivalent to above
+// const fibonacciList = function(n) {
+//     let fibList = []
+//     for (let i=0; i<=n; i++) {
+//         fibList.push(fibonacci(i))
+//     }
+//     return fibList
+// }
+
+// optimized fibonacci (w memoization)
+const fib_cache = [0, 1]
+const optimized_fibonacci = (n) => {
+    if (n < fib_cache.length) { // we've computed fib(n) before
+        return fib_cache[n]
+    } else { // recursively compute fib(n)
+        fibn = optimized_fibonacci(n-1) + optimized_fibonacci(n-2)
+        fib_cache.push(fibn)
+        return fibn
+    }   
+}
+
+const optimized_fiblist = (n) => {
+    optimized_fibonacci(n)
+    return fib_cache.filter((elem, key) => key <= n)
+}
