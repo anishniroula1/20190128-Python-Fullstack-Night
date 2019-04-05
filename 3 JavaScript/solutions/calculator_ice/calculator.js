@@ -32,13 +32,13 @@ const calculate = () => {
   if (current_value) {
     let a = parseFloat(running_total)
     let b = parseFloat(current_value)
-    if (operator === 'add' || operator === '+') {
+    if (operator === '+') {
       running_total = add(a, b)
-    } else if (operator === 'sub' || operator === '-') {
+    } else if (operator === '-') {
       running_total = subtract(a, b)
-    } else if (operator === 'mult' || operator === '*') {
+    } else if (operator === '×' || operator === '*') {
       running_total = multiply(a, b)
-    } else if (operator === 'divide' || operator === '/') {
+    } else if (operator === '÷' || operator === '/') {
       running_total = divide(a, b)
     }  
     current_value = ''
@@ -105,7 +105,7 @@ decDiv.addEventListener('click', () => {
 })
 
 ops.forEach(elem => {
-  let op = elem.id
+  let op = elem.innerText
   elem.addEventListener('click', () => {
     addOp(op)
   })
