@@ -149,3 +149,35 @@ const optimized_fiblist = (n) => {
     optimized_fibonacci(n)
     return fib_cache.filter((elem, key) => key <= n)
 }
+
+
+// Lists 11
+// Write a function combine_all that takes a list of lists, 
+// and returns a list containing each element from each of the lists.
+//
+// nums = [[5,2,3],[4,5,1],[7,6,3]]
+// combine_all(nums) → [5,2,3,4,5,1,7,6,3]
+
+const combine_all_using_loop = (arr) => {
+    let combined = []
+    for (subArray of arr) {
+        combined = combined.concat(subArray)
+    }
+    // // equivalent to above for loop
+    // for (let i=0; i<arr.length; i++) {
+    //     combined.concat(arr[i])
+    // }
+    return combined
+}
+
+const combine_all_using_for_each = (arr) => {
+    let combined = []
+    arr.forEach(subArray => {
+        subArray.forEach(elem => {
+            combined.push(elem)
+        })
+    })
+    return combined
+}
+
+const combine_all_using_spread = (arr) => [].concat(...arr)
