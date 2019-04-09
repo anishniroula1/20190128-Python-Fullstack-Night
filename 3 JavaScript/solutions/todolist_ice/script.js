@@ -42,6 +42,21 @@ const createTodoElement = (text) => {
   elem.appendChild(deleteBtn)
   elem.appendChild(toggleBtn)
 
+  // btn event listeners
+  deleteBtn.addEventListener('click', (evt) => {
+    const li = evt.target.closest('li')
+    const idx = parseInt(li.getAttribute('idx'))
+    todoList.deleteTodo(idx)
+    update(todoList)
+  })
+
+  toggleBtn.addEventListener('click', (evt) => {
+    const li = evt.target.closest('li')
+    const idx = li.getAttribute('idx')
+    todoList.toggleComplete(idx)
+    update(todoList)
+  })  
+
   return elem
 }
 
@@ -54,7 +69,12 @@ const update = (list) => {
     // map all todos to a new <li> element
     list.todos.map((todo, idx) => {
         const child = createTodoElement(todo.task)
-        child.setAttribute('id', idx)
+        child.setAttribute('idx', idx)
+        if (todo.completed) {
+            child.classList.add('completed')
+        } else {
+            child.classList.remove('completed')
+        }
         todosContainer.appendChild(child)
     }) 
 }
