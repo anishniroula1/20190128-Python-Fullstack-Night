@@ -181,3 +181,29 @@ const combine_all_using_for_each = (arr) => {
 }
 
 const combine_all_using_spread = (arr) => [].concat(...arr)
+
+// Practice: write a dog class
+// props: name, breed, (anything else you want)
+// methods: bark (anything else you want)
+
+class Dog {
+    constructor(name, breed) {
+        this.name = name
+        this.breed = breed
+    }
+    
+    bark() {
+        console.log('bark')
+    }
+}
+
+class Poodle extends Dog {
+    constructor(name) {
+        super(name, 'Poodle')
+    }
+
+    bark() {
+        super.bark()
+        console.log(`my name is ${this.name}`)
+    }
+}
