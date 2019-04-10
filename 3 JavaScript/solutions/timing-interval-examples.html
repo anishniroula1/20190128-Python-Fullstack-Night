@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>timing and interval examples</title>
+</head>
+<body>
+    <div id="moving_div">Moving</div>
+
+    <script>
+        let x
+        setTimeout( () => {
+            x = 'xanadu'
+            console.log('done!')
+        }, 1000)
+        x = 'xavier'
+        console.log(x)
+
+        let moving_div = document.querySelector('#moving_div');
+        moving_div.style.position = 'absolute';
+        moving_div.style.left = 0;
+        moving_div.style.top = 0;
+
+        let reverse = false
+        function animation_step() {
+            let left = parseInt(moving_div.style.left)
+            if (left > 100) {
+                reverse = true
+            } else if (left < 0) {
+                reverse = false
+            }
+
+            if (!reverse) {
+                moving_div.style.left = left + 1 + 'px';
+            } else {
+                moving_div.style.left = left - 1 + 'px';
+            }
+            window.requestAnimationFrame(animation_step);
+        }
+        window.requestAnimationFrame(animation_step);
+    </script>
+</body>
+</html>
