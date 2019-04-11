@@ -1,15 +1,36 @@
-
 # APIs and AJAX
 
-## API
+
+**Table of Contents** 
+- [API](#api)
+- [HTTP Methods](#http-methods)
+    - [HTTP Status Codes](#http-status-codes)
+- [AJAX](#ajax)
+  - [Fetch and ES6 Promises](#fetch-and-es6-promises)
+    - [Request options](#request-options)
+  - [async/await](#asyncawait)
+    - [Examples](#examples)
+      - [Use `fetch` to make an AJAX request](#use-fetch-to-make-an-ajax-request)
+  - [XMLHttpRequest](#xmlhttprequest)
+  - [jQuery](#jquery)
+- [Getting around CORS issues](#cors-issues)
+  - [Workarounds](#workarounds)
+    - [Proxy](#proxy)
+      - [Example](#example)
+- [JSON + XML](#json--xml)
+- [Public APIs](#public-apis)
+
+
+# API
 
 API stands for "application programming interface", it's a standardized way to send and receive data from a web service via HTTP requests (GET, POST, PUT, DELETE). For example, try executing this url in your browser `http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en`. This is an api for random inspiration quotes. Note the query parameters, which specify a key, format, and language. When you enter it in your browser, you execute an HTTP GET request. You can do the same thing from JavaScript, then process the result and control how it's displayed to the user. Websites are for people, APIs are for programs.
 
-There are many free and open APIs available on the internet that can provide many different forms of data. You can find some public APIs [here](https://github.com/toddmotto/public-apis) and [here](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation). When trying to access a url, remember the [parts of a url](https://doepud.co.uk/images/blogs/complex_url.png). APIs can receive parameters through query parameters and headers. You can see query parameters in the example url. Adding parameters to the request header is done through the `setRequestHeader` function on the `XMLHttpRequest` object.
+There are many free and open APIs available on the internet that can provide many different forms of data. You can find some public APIs [here](https://apilist.fun) ,[here](https://github.com/toddmotto/public-apis), and [here](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation). When trying to access a url, remember the [parts of a url](https://doepud.co.uk/images/blogs/complex_url.png). APIs can receive parameters through query parameters and headers. You can see query parameters in the example url. Adding parameters to the request header is done through the `setRequestHeader` function on the `XMLHttpRequest` object.
 
 
 
-### HTTP Methods
+------
+# HTTP Methods
 
 HTTP requests include a **method**, which indicates what the intention of the request is. These methods are conventional. You could use `GET` to delete an entry in the database, but you shouldn't. You can find more info [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods), [here](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods). The most common HTTP methods parallel the CRUD operations we discussed in Python.
 
@@ -34,7 +55,8 @@ The response to an HTTP request will have a **status code** which indicates whet
 | 5XX  | server error |
 
 
-## AJAX
+------
+# AJAX
 
 AJAX stands for "asynchronous javascript and XML", and allows you to execute HTTP requests from JavaScript. You can read more about AJAX [here](https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started), [here](https://developer.mozilla.org/en-US/docs/AJAX) and [here](https://www.w3schools.com/xml/ajax_intro.asp).
 
@@ -84,6 +106,51 @@ fetch('https://example.com/new/', {
 })
 ```
 
+## async/await
+
+ECMAScript2017 (ES8) introduced an easier way to work with promises. 
+
+### Examples 
+
+#### Use `fetch` to make an AJAX request
+Recall that `fetch()` is an *asynchronous function* that always returns a `Promise`.
+
+Handle promise the ES6 way:
+```js 
+function getRandomQuote() {
+    // fetch() returns promise
+    fetch('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1') 
+    // .then() resolves promise with response object and returns another promise
+    .then(res => res.json()) 
+    // console logs response JSON
+    .then(jsonRes => console.log(jsonRes))  
+    // catches any errors
+    .catch(err => console.log(err));
+}
+
+getRandomQuote();
+```
+
+Using async/await:
+
+1. Use the `async` keyword at a function declaration to specify that the function contains some asynchronous operation.
+
+2. Add `await` keyword before any statement that returns a promise. Store the resolved values as variables.
+
+3. Treat other operations as synchronous operations.
+
+```js 
+async function getRandomQuote() { // Step 1
+    const res = await fetch('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1'); // Step 2
+    const jsonRes = await res.json(); // Step 2
+
+    console.log(jsonRes); // Step 3
+}
+
+getRandomQuote();
+```
+
+
 ## XMLHttpRequest
 Here's how to execute an AJAX request in native JavaScript. This was the older standard method of sending HTTP requests. You can read more about XMLHttpRequest [here](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest). Remember status 200 means 'success'.
 
@@ -125,6 +192,8 @@ http_get("https://api.ipify.org/?format=json", function(data) {
 });
 ```
 
+## jQuery
+
 It's a little more succinct in jQuery:
 
 ```javascript
@@ -140,7 +209,45 @@ $.ajax({
 If you receive the response "No 'Access-Control-Allow-Origin' header is present on the requested resource", it's because the remote server you're sending to the request from has security controls in place that prevent access from a client. You can read more about CORS [here](https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe) and [here](https://security.stackexchange.com/questions/108835/how-does-cors-prevent-xss).
 
 
-## JSON + XML
+------
+# CORS Issues
+
+Taken from the [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS):
+
+Cross-Origin Resource Sharing (**CORS**) is a mechanism that uses HTTP headers to tell a browser to allow a web app running at one origin (domain) permission to access resources from a server at a different origin. 
+
+An example of a cross-origin request: The frontend JavaScript code for a web application served from http://dogs.com uses makes a `fetch` request for http://api.cats.com/pics/.
+
+For security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts. For example, `XMLHttpRequest` and `fetch` follow the same-origin policy. This means that a web application using those APIs can only request HTTP resources from the same origin the application was loaded from, unless the response from the other origin includes the right CORS headers.
+
+**Note:** CORS is set on the server-side and *there is nothing you can do from the client-side to change that setting*. That is up to the server/API.
+
+This is a common issue to get developing on the client-side and consuming APIs hosted on another origin.
+
+## Workarounds
+There are other workarounds, such as [JSONP](https://en.wikipedia.org/wiki/JSONP), and other less secure ways of bypassing this issue client-side, but we will focus on one of the simplest solutions: proxies.
+
+### Proxy
+
+Proxies are a way to circumvent the CORS issue. You can set up your own proxy server or use a third-party service that proxies your request and automatically enable CORS for your endpoint.
+
+
+The simplest solution is to a web app such as: https://cors-anywhere.herokuapp.com/
+You simply attach the url you are trying to request after it.
+
+#### Example 
+```js
+fetch('https://cors-anywhere.herokuapp.com/https://api.cats.com/pics/')
+.then(res => res.text())
+.catch(err => console.log(err))
+.then(text => console.log(text))
+```
+
+See other proxies [here](https://gist.github.com/jimmywarting/ac1be6ea0297c16c477e17f8fbe51347)
+
+
+------
+# JSON + XML
 
 JSON and XML are two popular ways of formatting data. Most APIs either return information in JSON or XML.
 
@@ -173,7 +280,8 @@ JSON and XML are two popular ways of formatting data. Most APIs either return in
 </employees>
 ```
 
-## Public APIs
-
+------
+# Public APIs
+- [categorized, user friendly list](https://apilist.fun)
 - [a list on github](https://github.com/toddmotto/public-apis)
 - [list on data.gov](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation)
