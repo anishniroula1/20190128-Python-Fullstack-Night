@@ -39,4 +39,4 @@ markDone: function(index) {
 }
 ```
 In todos.html:
-- Use Vue logic (hint: v-if, v-else) to progmatically display a button depending if the todo is marked completed.
+- Use Vue logic (hint: v-if, v-else) to programmatically display a button depending if the todo is marked completed.
