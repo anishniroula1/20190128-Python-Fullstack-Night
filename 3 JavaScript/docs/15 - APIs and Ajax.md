@@ -4,19 +4,13 @@
 **Table of Contents** 
 - [API](#api)
 - [HTTP Methods](#http-methods)
-    - [HTTP Status Codes](#http-status-codes)
 - [AJAX](#ajax)
   - [Fetch and ES6 Promises](#fetch-and-es6-promises)
-    - [Request options](#request-options)
   - [async/await](#asyncawait)
-    - [Examples](#examples)
-      - [Use `fetch` to make an AJAX request](#use-fetch-to-make-an-ajax-request)
+  - [axios](#axios)
   - [XMLHttpRequest](#xmlhttprequest)
   - [jQuery](#jquery)
 - [Getting around CORS issues](#cors-issues)
-  - [Workarounds](#workarounds)
-    - [Proxy](#proxy)
-      - [Example](#example)
 - [JSON + XML](#json--xml)
 - [Public APIs](#public-apis)
 
@@ -150,6 +144,52 @@ async function getRandomQuote() { // Step 1
 getRandomQuote();
 ```
 
+## Axios
+
+[Axios](https://github.com/axios/axios) is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon the Vanilla JavaScript form of AJAX, so it doesn't offer anything you can't otherwise do with Vanilla.
+
+To use, you'll need to either install the library or use a **cdn**.
+
+Using cdn:
+```html
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+```
+
+### Examples
+```javascript
+axios.get(url)
+.then(function (response) {
+  console.log(response.data)
+})
+```
+
+```javascript
+let config = {
+  headers: {
+    'x-api-key': api_key
+  }
+}
+axios.get(url, config)
+.then(function (response) {
+  console.log(response.data)
+})
+```
+
+```javascript
+let data = {
+  'key': 'value'
+  'data': 'to send'
+}
+let config = {
+  headers: {
+    'header name': 'header value'
+  }
+}
+axios.post(url, data, config)
+.then(function(response) {
+  console.log(response.data)
+})
+```
 
 ## XMLHttpRequest
 Here's how to execute an AJAX request in native JavaScript. This was the older standard method of sending HTTP requests. You can read more about XMLHttpRequest [here](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest). Remember status 200 means 'success'.
