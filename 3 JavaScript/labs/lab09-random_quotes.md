@@ -14,7 +14,7 @@ Use the [favqs.com](https://favqs.com/api/) api to show a random quote. To start
 ```
 
 
-## Version 2
+## Version 2 (Optional)
 
 The API also supports browsing quotes. You can use the `page` and `filter` parameters to get a bunch of quotes. You can add page buttons and/or a text `input` field and `button` for filtering.
 
