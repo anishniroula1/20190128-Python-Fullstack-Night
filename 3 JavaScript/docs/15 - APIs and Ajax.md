@@ -144,6 +144,7 @@ async function getRandomQuote() { // Step 1
 getRandomQuote();
 ```
 
+-----
 ## Axios
 
 [Axios](https://github.com/axios/axios) is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon the Vanilla JavaScript form of AJAX, so it doesn't offer anything you can't otherwise do with Vanilla.
