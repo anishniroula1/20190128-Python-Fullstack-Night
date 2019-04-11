@@ -207,3 +207,54 @@ class Poodle extends Dog {
         console.log(`my name is ${this.name}`)
     }
 }
+
+// Dict 1
+// Given a the two arrays, combine them into a dictionary.
+// lists_to_dict(['a', 'b', 'c'], ['aardvark', 'bear', 'coyote']) 
+// {'a': 'aardvark', 'b': 'bear', 'c': 'coyote'}
+
+// using map and Objecct.assign
+function lists_to_dict(keys, values) {
+    /*
+    returns dictionary of keys mapped to values
+    :keys: arr
+    :values: arr
+    */
+    let combined = {}
+    keys.map((elem, idx) => Object.assign(combined, {[elem]: values[idx]}))
+    return combined
+}
+
+// using map, spread and Object.assign
+function list_to_dict(keys, values) {
+    return Object.assign({}, ...keys.map((n, i) => {[n]: values[i]})) 
+}
+
+// using map and reduce
+function lists_to_dict(keys, values) {
+    const map_keys_to_values = (key, idx) => [key, values[idx]]
+    const update_dictionary = (acc, cur) => {
+        acc[cur[0]] = cur[1]
+        return acc
+    }
+    return keys.map(map_keys_to_values)
+               .reduce(update_dictionary, {})
+}
+
+// using old fashioned loop and logic
+function lists_to_dict(keys, values) {
+    let combined = {}
+    for (let i=0; i<keys.length; i++) {
+        combined[keys[i]] = values[i]
+    }
+    return combined
+}
+
+/*
+dict.update(dict_to_update_with)          // python
+Object.assign(dict, dict_to_update_with)  // js
+// python                                 // js
+arr.map((elem) => elem_mapped)            [elem for ...]
+arr.filter((elem) => condition)           [elem for ... condition]
+arr.reduce((acc, cur) => acc - cur)       arr.sort(lambda acc, cur : acc - cur)
+*/
