@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Useless Fact</title>
+    <style>
+        body, html {
+          height: 100%;
+          font-family: "Century Gothic", sans-serif;
+          background: coral;
+        }
+
+        header {
+          color: white;
+          text-align: center;
+          padding-bottom: 5%;
+        }
+
+        #fact-body {
+          margin: auto;
+          width: 60%;
+          border-radius: 15px;
+          background: #FFF;
+          padding: 30px;
+        }
+
+        #text {
+          margin: auto;
+          width: 80%;
+        }
+
+        .btn {
+          float: right;
+          border-radius: 20px;
+          padding: 10px;
+          color: white;
+          background-color: coral;
+        }
+
+        .btn:hover {
+          -webkit-filter: brightness(70%);
+        }
+
+        .footer {
+          margin: auto;
+          padding: 20px;
+          font-size: 0.8em;
+        }
+
+        .footer > a {
+          color: black;
+        }
+
+        .footer > a:hover {
+          opacity: 0.8;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+      <h1>Random Useless Fact</h1>
+    </header>
+    <div id='fact-body'>
+        <p id='fact'></p>
+        <div class='footer'>
+          <a id='source'></a>
+          <button class='btn' id='next'>another one</button>
+        </div>
+    </div>
+
+<script>
+const factElem = document.querySelector('#fact')
+const sourceElem = document.querySelector('#source')
+const next = document.querySelector('#next')
+
+const responseToJSON = async (url) => {
+    try {
+        const res = await fetch(url)
+        const json = await res.json()
+        console.log(json)
+
+        factElem.innerText = json.text
+        sourceElem.innerText = json.source
+        sourceElem.href = json.source_url
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+responseToJSON('https://cors-anywhere.herokuapp.com/http://randomuselessfact.appspot.com/random.json?language=en')
+
+next.addEventListener('click', () => {
+     responseToJSON('https://cors-anywhere.herokuapp.com/http://randomuselessfact.appspot.com/random.json?language=en')   
+})
+
+</script>
+</body>
+</html>
