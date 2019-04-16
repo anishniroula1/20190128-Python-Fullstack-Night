@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pocket Calculator</title>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>    
+    <link rel='stylesheet' href='calculator.css'></link>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="calc-body">
+    <div id='calc-title'><b>TI✮ <span>EIGHTY-POOR</span></b>
+    </div>
+    <div id='output'>
+      <div id='display'>
+        {{ display }}
+      </div>
+      <div id='history'>
+        {{ historyDisplay }}
+      </div>
+    </div>
+    <div 
+      class='btn clear' 
+      id='AC'
+      v-on:click="clearAll"
+    >
+      AC
+    </div>
+    <div 
+      class='btn clear' 
+      id='CE'
+      v-on:click="clearEntry"
+    >
+      CE
+    </div>
+    <div 
+      class='btn op' 
+      id='mult'
+      v-on:click="handleOpClick"
+    >
+      ×
+    </div>
+    <div 
+      class='btn op' 
+      id='divide'
+      v-on:click="handleOpClick"
+    >
+      ÷
+    </div>
+    <div 
+      class='btn op' 
+      id='add'
+      v-on:click="handleOpClick"
+    >
+      +
+    </div>
+    <div 
+      class='btn op' 
+      id='sub'
+      v-on:click="handleOpClick"
+    >
+      -
+    </div>
+    <div 
+      class='btn' 
+      id='eq'
+      v-on:click="calculate"
+    >
+      =
+    </div>
+    <div 
+      class='btn' 
+      id='dec'
+      v-on:click="addDecimal"
+    >
+      .
+    </div>
+    <div 
+      class='btn num' 
+      id='zero'
+      v-on:click="handleDigitClick"
+    >
+      0
+    </div>
+    <div 
+      class='btn num' 
+      id='one'
+      v-on:click="handleDigitClick"
+    >
+      1
+    </div>
+    <div 
+      class='btn num' 
+      id='two'
+      v-on:click="handleDigitClick"
+    >
+      2
+    </div>
+    <div 
+      class='btn num' 
+      id='three'
+      v-on:click="handleDigitClick"
+    >
+      3
+    </div>
+    <div 
+      class='btn num' 
+      id='four'
+      v-on:click="handleDigitClick"
+    >
+      4
+    </div>
+    <div 
+      class='btn num' 
+      id='five'
+      v-on:click="handleDigitClick"
+    >
+      5
+    </div>
+    <div 
+      class='btn num' 
+      id='six'
+      v-on:click="handleDigitClick"
+    >
+      6
+    </div>
+    <div 
+      class='btn num' 
+      id='seven'
+      v-on:click="handleDigitClick"
+    >
+      7
+    </div>
+    <div 
+      class='btn num' 
+      id='eight'
+      v-on:click="handleDigitClick"
+    >
+      8
+    </div>
+    <div 
+      class='btn num' 
+      id='nine'
+      v-on:click="handleDigitClick"
+    >
+      9
+    </div>
+  </div>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
