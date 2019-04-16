@@ -299,3 +299,14 @@ function unify(d) {
 
     return Object.assign({}, ...Object.entries(running_sum).map(([key, [rsum, count]]) => ({[key]: rsum/count}))) 
 }
+
+function unify(d) {
+    let firsts = new Set(Object.keys(d).map(key => key[0])) // set of first letters
+    let avg = {}
+    for (let letter of firsts) {
+        let group = Object.entries(d).filter(([key, val]) => key[0] == letter)
+        let sum = group.reduce((total, current) => total + current[1], 0)
+        avg[letter] = sum / group.length
+    }
+    return avg
+}
