@@ -258,3 +258,44 @@ arr.map((elem) => elem_mapped)            [elem for ...]
 arr.filter((elem) => condition)           [elem for ... condition]
 arr.reduce((acc, cur) => acc - cur)       arr.sort(lambda acc, cur : acc - cur)
 */
+
+// Dict 2
+// Using the result from the previous problem, iterate through the dictionary and calculate the average price of an item.
+// looping through values
+function average(dict) {
+    let sum = count = 0
+    for (let key in dict) {
+        sum += dict[key]
+        count++
+    }
+    return sum/count
+}
+
+// using reduce for sum
+function average(dict) {
+    let prices = Object.values(dict)
+    let sum = prices.reduce((total, cur) => total + cur)
+    return sum/prices.length
+}
+
+// Dict 3
+// Average numbers whose keys start with the same letter. Output a dictionary containing those letters as keys and the averages.
+
+// d = {'a1':4, 'a2':2, 'a3':3, 'b1':10, 'b2':1, 'b3':1, 'c1':4, 'c2':5, 'c3':6}
+// unify(d) -> {'a':3.0, 'b':4.0, 'c':5.0}
+function unify(d) {
+    let running_sum = {}
+
+    for (let key in d) {
+        let first_letter = key[0]
+        let val = d[key]
+        if (running_sum.hasOwnProperty(first_letter)) {
+            [current_sum, count] = running_sum[first_letter]
+            running_sum[first_letter] = [current_sum + val, count + 1]
+        } else {
+            running_sum[first_letter] = [val, 1]
+        }
+    }
+
+    return Object.assign({}, ...Object.entries(running_sum).map(([key, [rsum, count]]) => ({[key]: rsum/count}))) 
+}
