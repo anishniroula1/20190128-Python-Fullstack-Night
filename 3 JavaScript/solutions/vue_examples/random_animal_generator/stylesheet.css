@@ -11,11 +11,20 @@ header {
 }
 
 .cat-body {
+  display: grid;
   margin: auto;
-  width: 60%;
+  max-width: 70%;
+  max-height: 70%;
   border-radius: 15px;
   background: #FFF;
   padding: 30px;
+}
+
+.cat-img {
+  margin: auto;
+  max-width: 80%;
+  max-height: 360px;
+  padding-bottom: 10px;
 }
 
 .text {
@@ -24,7 +33,7 @@ header {
 }
 
 .btn {
-  float: right;
+  margin: auto;
   border-radius: 20px;
   padding: 10px;
   color: white;
@@ -33,6 +42,11 @@ header {
 
 .btn:hover {
   -webkit-filter: brightness(70%);
+}
+
+.btn:focus {
+  border: none;
+  outline: none;
 }
 
 .footer {

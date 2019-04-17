@@ -16,6 +16,9 @@ let app = new Vue({
       } catch(err) {
         console.log(err)
       }
+    },
+    next: function() {
+      this.getCat()
     }
   },
 })

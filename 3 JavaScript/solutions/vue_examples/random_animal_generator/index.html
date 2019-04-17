@@ -8,7 +8,8 @@
 <body>
     <header>Random Cat Generator</header>
     <div id='app' class='cat-body'>
-        <img v-bind:src="catImg" />
+        <img class='cat-img' v-bind:src="catImg" />
+        <button class='btn' v-on:click="next">→</button>
     </div>
 
     <script src='randanimal.js'></script>
