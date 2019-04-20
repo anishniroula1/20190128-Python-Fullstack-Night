@@ -48,6 +48,7 @@ M-F 6:00PM – 9:30PM
 | Assigned on | Lab \#s |
 | ------------- | ---- |
 | 4/17 | 1 |
+| 4/19 | 2 |
 
 ## Class Members
 
