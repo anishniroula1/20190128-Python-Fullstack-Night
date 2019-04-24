@@ -1,0 +1,69 @@
+// noodling around in the django shell
+
+(ENV) todosite>python .\manage.py shell
+
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from todos.models import *
+>>> Todo.objects.all()
+<QuerySet [<Todo: walk dog>, <Todo: wash cat>]>
+>>> Todo.objects.all()[0]
+<Todo: walk dog>
+>>> t = Todo.objects.last()
+>>> t
+<Todo: wash cat>
+>>> t.text
+'wash cat'
+>>> t.created_date
+datetime.datetime(2019, 4, 24, 3, 55, 2, tzinfo=<UTC>)
+>>> t.completed
+False
+>>> t.completed_date
+>>> t.toggle()
+>>> t
+<Todo: wash cat>
+>>> t.completed
+True
+>>> t.completed_date
+datetime.datetime(2019, 4, 24, 4, 0, 3, 354860, tzinfo=<UTC>)
+>>> delete t
+  File "<console>", line 1
+    delete t
+           ^
+SyntaxError: invalid syntax
+>>> t.delete()
+(1, {'todos.Todo': 1})
+>>> t = Todo.objects.all()
+>>> t
+<QuerySet [<Todo: walk dog>]>
+>>> t = Todo(text='new cat')
+>>> t
+<Todo: new cat>
+>>> t.completed
+False
+>>> t.save()
+>>>
+>>> edit_t = Todo.objects.get(text='new cat')
+>>> edit_t
+<Todo: new cat>
+>>> edit_t.pk
+3
+>>> edit_t.completed
+False
+>>> edit_t.text = 'eat cat'
+>>> edit_t.save()
+>>>
+
+
+
+
+
+
+
+
+
+
+
+
+
