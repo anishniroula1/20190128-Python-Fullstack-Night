@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}What to do?{% endblock title %}</title>
+    {% block main_styles %}
+        <link rel='stylesheet' href='{% static "todos/css/stylesheet.css" %}'>
+    {% endblock main_styles %}
+    {% block extra_styles %}{% endblock extra_styles %}
+    {% block js_head %}{% endblock js_head %}
+</head>
+<body>
+    {% block content %}{% endblock content %}
+    {% block js_body %}{% endblock js_body %}
+</body>
+</html>
