@@ -81,6 +81,10 @@ button {
   display: none;
 }
 
+a {
+  color: #323333;
+}
+
 i {
 float:right;
 padding-left: 1em;

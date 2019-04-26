@@ -16,8 +16,16 @@
 
         <ul id='todos-container'>
             {% for todo in todos %}
-                <li>
+                <li class="{% if todo.completed %} completed {% endif %}">
                     {{ todo }}
+                    <a href="{% url 'todos:delete_todo' pk=todo.pk %}"><i class='fa fa-times'></i></a>
+                    <a href="{% url 'todos:toggle_todo' pk=todo.pk %}">
+                        {% if todo.completed %}
+                            <i class="fa fa-undo"></i>
+                        {% else %}
+                            <i class='fa fa-check'></i>
+                        {% endif %}
+                    </a>
                 </li>
             {% endfor %}
         </ul>

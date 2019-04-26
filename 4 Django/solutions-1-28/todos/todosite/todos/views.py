@@ -8,9 +8,9 @@ def index(request):
     return render(request, 'todos/index.html', {'todos': todos})
 
 def add_todo(request):
-    # print(request)
-    # print(request.POST)
     if request.method == 'POST':
+        # print(request.POST) # request.POST returns a dictionary of post parameters
+        # # all inputs from a form are available in it, where the key == input.name
         # create new todo from POST parameters
         text_from_input = request.POST['todo']
         todo = Todo(text=text_from_input)
@@ -22,12 +22,12 @@ def toggle_todo(request, pk):
     # # equivalent to above, but get_obj_or_404 is safer
     # todo = Todo.objects.get(pk=pk)
     todo.toggle()
-    return HttpResponse('success')
+    return redirect('todos:index')
 
 def delete_todo(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     todo.delete()    
-    return HttpResponse('success')
+    return redirect('todos:index')
 
 def edit_todo(request, pk):
     pass
