@@ -17,7 +17,15 @@
         <ul id='todos-container'>
             {% for todo in todos %}
                 <li class="{% if todo.completed %} completed {% endif %}">
-                    {{ todo }}
+                    {% if editing and todo.pk == pk %}
+                        <form action="{% url 'todos:edit_todo' pk=pk %}" method='POST'>
+                            {% csrf_token %}            
+                            <input id="edit" name="todo" type="text" value='{{todo.text}}' />
+                            <button type='submit'></button>
+                        </form>
+                    {% else %}
+                        {{ todo }}
+                    {% endif %}
                     <a href="{% url 'todos:delete_todo' pk=todo.pk %}"><i class='fa fa-times'></i></a>
                     <a href="{% url 'todos:toggle_todo' pk=todo.pk %}">
                         {% if todo.completed %}
@@ -26,6 +34,7 @@
                             <i class='fa fa-check'></i>
                         {% endif %}
                     </a>
+                    <a href="{% url 'todos:edit_view' pk=todo.pk %}"><i class='fa fa-pencil-alt'></i></a>
                 </li>
             {% endfor %}
         </ul>

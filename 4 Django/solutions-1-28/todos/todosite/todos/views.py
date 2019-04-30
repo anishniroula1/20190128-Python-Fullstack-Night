@@ -29,5 +29,20 @@ def delete_todo(request, pk):
     todo.delete()    
     return redirect('todos:index')
 
+def edit_view(request, pk):
+    todos = Todo.objects.all().order_by('-created_date', 'completed')
+    # todo = get_object_or_404(Todo, pk=pk)
+    return render(request, 'todos/index.html', {
+        'todos': todos, 
+        'pk': pk, 
+        'editing': True
+    })
+
+
 def edit_todo(request, pk):
-    pass
+    todo = get_object_or_404(Todo, pk=pk)
+    if request.method == 'POST':
+        text_from_input = request.POST['todo']
+        todo.text = text_from_input
+        todo.save()
+    return redirect('todos:index')
