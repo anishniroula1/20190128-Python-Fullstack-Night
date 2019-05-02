@@ -5,7 +5,9 @@ from .models import *
 # Create your views here.
 def index(request):
     todos = Todo.objects.all().order_by('-created_date', 'completed')
-    return render(request, 'todos/index.html', {'todos': todos})
+    pi = 3.14
+    context = {'todos': todos}
+    return render(request, 'todos/index.html', context)
 
 def add_todo(request):
     if request.method == 'POST':

@@ -126,3 +126,7 @@ STATICFILES_DIRS = (
         'static',
     ),    
 )
+
+# LOGIN_REDIRECT
+LOGIN_REDIRECT_URL = 'todos:index'
+LOGOUT_REDIRECT_URL = 'todos:index'
