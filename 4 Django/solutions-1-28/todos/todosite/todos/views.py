@@ -1,6 +1,20 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import *
+
+#Custom decorator
+def user_owns_todo(func):
+    def check_and_call(request, *args, **kwargs):
+        #user = request.user
+        #print user.id
+        pk = kwargs["pk"]
+        todo = Todo.objects.get(pk=pk)
+        if (todo.user != request.user): 
+            return HttpResponseForbidden()
+        return func(request, *args, **kwargs)
+    return check_and_call
+
 
 # Create your views here.
 def index(request):
@@ -22,23 +36,23 @@ def add_todo(request):
         todo.save()
     return redirect('todos:index')
 
-@login_required
+@user_owns_todo
 def toggle_todo(request, pk):
-    todo = get_object_or_404(Todo, pk=pk)
+    todo = get_object_or_404(Todo, pk=pk, user=request.user)
     # # equivalent to above, but get_obj_or_404 is safer
     # todo = Todo.objects.get(pk=pk)
     todo.toggle()
     return redirect('todos:index')
 
-@login_required
+@user_owns_todo
 def delete_todo(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     todo.delete()    
     return redirect('todos:index')
 
-@login_required
+@user_owns_todo
 def edit_view(request, pk):
-    todos = Todo.objects.all().order_by('-created_date', 'completed')
+    todos = Todo.objects.filter(user=request.user).order_by('-created_date', 'completed')
     # todo = get_object_or_404(Todo, pk=pk)
     return render(request, 'todos/index.html', {
         'todos': todos, 
@@ -46,7 +60,7 @@ def edit_view(request, pk):
         'editing': True
     })
 
-@login_required
+@user_owns_todo
 def edit_todo(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == 'POST':
