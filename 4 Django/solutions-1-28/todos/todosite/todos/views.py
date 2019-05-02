@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import *
 
 #Custom decorator
@@ -16,6 +16,9 @@ def user_owns_todo(func):
     return check_and_call
 
 
+def not_doug(user):
+    return not user.username.lower().startswith('doug')
+
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -26,6 +29,7 @@ def index(request):
     return render(request, 'todos/index.html', context)
 
 @login_required
+@user_passes_test(not_doug)
 def add_todo(request):
     if request.method == 'POST':
         # print(request.POST) # request.POST returns a dictionary of post parameters
