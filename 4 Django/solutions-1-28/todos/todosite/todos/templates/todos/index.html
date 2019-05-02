@@ -15,6 +15,9 @@
         </form>
 
         <ul id='todos-container'>
+            {% if not user.is_authenticated %}
+                <li>Please login to see your todo list.</li>
+            {% endif %}
             {% for todo in todos %}
                 <li class="{% if todo.completed %} completed {% endif %}">
                     {% if editing and todo.pk == pk %}
