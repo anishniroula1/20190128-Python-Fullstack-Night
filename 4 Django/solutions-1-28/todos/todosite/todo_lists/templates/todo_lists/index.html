@@ -1,0 +1,32 @@
+{% extends "todos/base.html" %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> 
+
+{% endblock extra_styles %}
+
+{% block content %}
+    <div id='app'>
+        <h1>Welcome {{ user }}! Here are your todo lists.</h1>
+
+        <form action="{% url 'todo_lists:add' %}" method='POST'>
+            {% csrf_token %}
+            <div class='input-container'>      
+                <input id='todo-list-input' type='text' name='todo_list' placeholder='Create new todo list' />
+                <button type='submit' class='input-span-next'><i class="fa fa-plus"></i></button>
+            </div>
+        </form>
+
+        <ul id='todos-container'>
+            {% if not user.is_authenticated %}
+                <li>Please login to see your todo lists.</li>
+            {% endif %}
+            {% for todo_list in lists %}
+                <li>
+                    <a href="{% url 'todo_lists:detail' pk=todo_list.pk %}"> {{todo_list.title}} </a>
+                    <a href="{% url 'todo_lists:delete' pk=todo_list.pk %}"><i class="fa fa-times"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

@@ -5,20 +5,17 @@ body {
   display: grid;
   grid-template-rows: auto;
   justify-items: center;
-  padding-top: 50px;
-}
-
-body, html {
-  margin: 0;
-  height: 100%;
 }
 
 #app {
+    padding: 5% 10%;
     width: 50%;
 }
-nav {
-  padding: 20px 20px 20px 0;
+
+.navigation {
+  padding: 10px;
 }
+
 nav a {
   padding: 10px;
   text-decoration: none;
@@ -29,20 +26,17 @@ nav a {
   margin-right: 15px;
 }
 
-@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
-
 .holder {
   background: #fff;
 }
 
-ul {
+ul#todos-container {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-ul li {
+ul#todos-container > li {
   padding: 20px;
   font-size: 1.3em;
   background-color: #E0EDF4;
@@ -52,7 +46,7 @@ ul li {
   overflow: hidden;
 }
 
-.completed {
+ul#todos-container > li.completed {
   background-color: #b7b7b7;
   border-left: 5px solid #3E5252;
   text-decoration-line: line-through;
@@ -68,7 +62,8 @@ p {
   box-shadow: 0px 0px 40px lightgray;
 }
 
-#todo-input {
+#todo-input,
+#todo-list-input {
   width: calc(100% - 40px);
   border: 0;
   padding: 20px;
@@ -80,6 +75,22 @@ p {
 button {
   display: none;
 }
+
+.input-container {
+  display: flex;
+  width: 100%;
+}
+
+#todo-list-input {
+  flex: 4;
+}
+
+.input-span-next {
+  display: flex;
+  padding: 20px;
+  border: none;
+}
+
 
 a {
   color: #323333;
@@ -93,4 +104,8 @@ cursor:pointer;
 
 i:hover {
   opacity: 0.6;
+}
+
+.input-span-next > i {
+  padding: 0;
 }

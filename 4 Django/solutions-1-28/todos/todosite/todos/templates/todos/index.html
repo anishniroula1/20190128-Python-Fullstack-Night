@@ -6,9 +6,9 @@
 
 {% block content %}
     <div id='app'>
-        <h1>Welcome to your todo list!</h1>
+        <h1>Welcome {{ user }} to your {{ title }} list!</h1>
 
-        <form action="{% url 'todos:add_todo' %}" method='POST'>
+        <form action="{% url 'todos:add' todo_list=todo_list %}" method='POST'>
             {% csrf_token %}            
             <input id='todo-input' type='text' name='todo' placeholder='Enter a task...' />
             <button type='submit'></button>
@@ -21,7 +21,7 @@
             {% for todo in todos %}
                 <li class="{% if todo.completed %} completed {% endif %}">
                     {% if editing and todo.pk == pk %}
-                        <form action="{% url 'todos:edit_todo' pk=pk %}" method='POST'>
+                        <form action="{% url 'todos:edit' pk=pk %}" method='POST'>
                             {% csrf_token %}            
                             <input id="edit" name="todo" type="text" value='{{todo.text}}' />
                             <button type='submit'></button>
@@ -29,8 +29,8 @@
                     {% else %}
                         {{ todo }}
                     {% endif %}
-                    <a href="{% url 'todos:delete_todo' pk=todo.pk %}"><i class='fa fa-times'></i></a>
-                    <a href="{% url 'todos:toggle_todo' pk=todo.pk %}">
+                    <a href="{% url 'todos:delete' pk=todo.pk %}"><i class='fa fa-times'></i></a>
+                    <a href="{% url 'todos:toggle' pk=todo.pk %}">
                         {% if todo.completed %}
                             <i class="fa fa-undo"></i>
                         {% else %}
