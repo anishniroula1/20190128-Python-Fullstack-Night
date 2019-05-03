@@ -129,5 +129,5 @@ STATICFILES_DIRS = (
 )
 
 # LOGIN_REDIRECT
-LOGIN_REDIRECT_URL = 'todos:index'
-LOGOUT_REDIRECT_URL = 'todos:index'
+LOGIN_REDIRECT_URL = 'todo_lists:index'
+LOGOUT_REDIRECT_URL = 'todo_lists:index'
