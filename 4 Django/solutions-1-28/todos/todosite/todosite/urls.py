@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', include('todo_lists.urls')),
+    path('ajax_todos/', include('ajax.urls')),
     path('todos/', include('todos.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),

@@ -13,7 +13,7 @@ def register(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('todos:index')
+                return redirect('todo_lists:dashboard')
 
     form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

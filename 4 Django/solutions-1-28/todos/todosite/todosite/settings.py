@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ajax',
     'todos',
     'todo_lists',
     'django.contrib.admin',
@@ -129,5 +130,5 @@ STATICFILES_DIRS = (
 )
 
 # LOGIN_REDIRECT
-LOGIN_REDIRECT_URL = 'todo_lists:index'
-LOGOUT_REDIRECT_URL = 'todo_lists:index'
+LOGIN_REDIRECT_URL = 'todo_lists:dashboard'
+LOGOUT_REDIRECT_URL = 'todo_lists:dashboard'

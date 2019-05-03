@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> 
+{% endblock extra_styles %}
+
+{% block content %}
+    <div id='app'>
+        <h1>Welcome {{ user }}! Here are your todo lists.</h1>
+
+        <div class='input-container'>      
+            <input id='todo-list-input' type='text' name='todo_list' placeholder='Create new todo list' />
+            <button id='todo-list-submit' type='submit' class='input-span-next'><i class="fa fa-plus"></i></button>
+        </div>
+
+        <ul id='todos-container'>
+            {% if not user.is_authenticated %}
+                <li>Please login to see your todo lists.</li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock content %}
+{% block js_body %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src='{% static "ajax/js/dashboard.js" %}'></script>
+{% endblock js_body %}

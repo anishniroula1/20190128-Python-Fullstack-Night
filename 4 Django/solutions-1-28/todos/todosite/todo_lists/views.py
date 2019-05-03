@@ -35,7 +35,7 @@ def todo_list(request, pk):
 @login_required
 def add_todo_list(request):
     if request.method == 'POST':
-        # print(request.POST) # request.POST returns a dictionary of post parameters
+        print(request.POST) # request.POST returns a dictionary of post parameters
         # # all inputs from a form are available in it, where the key == input.name
         # create new todo from POST parameters
         text_from_input = request.POST['todo_list']
