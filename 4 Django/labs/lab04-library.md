@@ -3,7 +3,7 @@
 
 Let's create an application for representing a library. You should have two models (below) and a page for users to check out and check in books. You can enter the book and author information using the admin panel.
 
-- Book: a model representing a book, with a title, publish date, and an author (foreign key)
+- Book: a model representing a book, with a title, publish date, and an author (many-to-many foreign key)
 - Author: a model representing an author of a book, one author can have multiple books
 
 
