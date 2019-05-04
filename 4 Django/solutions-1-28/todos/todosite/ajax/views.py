@@ -54,4 +54,29 @@ def todo_list(request, todo_list):
         
 
 def todo(request, todo_list, pk):
+    todo = get_object_or_404(Todo, pk=pk, user=request.user)
+    if request.method == 'GET':
+        # read todo
+        response = serialize('json', todo) 
+        return JsonResponse(response, safe=False)
+
+    elif request.method == 'PUT':
+        # toggle and edit todo
+        body = json.loads(request.body)
+
+        if body.get('toggle'):
+            # toggle todo
+            todo.toggle()
+
+        if body.get('todo'):
+            # edit todo
+            text = body['todo']
+            # print('editing todo:', text)
+            todo.text = text
+            todo.save()
+
+    elif request.method == 'DELETE':
+        # delete todo
+        todo.delete()
+
     return HttpResponse('Success')
