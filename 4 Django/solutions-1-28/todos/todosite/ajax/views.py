@@ -15,17 +15,17 @@ def todo_lists(request):
         return JsonResponse(data, safe=False)
 
     elif request.method == 'POST':
-        print(request.body)
-        response = json.loads(request.body)
+        # print(type(request.body), request.body)
+        body = json.loads(request.body)
         # create new todo list
-        todo_title = response['todo_list']
+        todo_title = body['todo_list']
         todo_list = TodoList(user=request.user, title=todo_title)
         todo_list.save()
         return HttpResponse('Success')
 
 
 def todo_list(request, todo_list):
-    todo_list = get_object_or_404(TodoList, pk=todo_list)
+    todo_list = get_object_or_404(TodoList, pk=todo_list, user=request.user)
     todos = Todo.objects.filter(todo_list=todo_list)
     if request.method == 'GET':
         # read todo_list
@@ -41,7 +41,8 @@ def todo_list(request, todo_list):
 
     elif request.method == 'POST':
         # create todo
-        text = request.POST['todo']
+        body = json.loads(request.body)
+        text = body['todo']
         todo = Todo(text=text, user=request.user, todo_list=todo_list)
         todo.save()
 
@@ -53,16 +54,4 @@ def todo_list(request, todo_list):
         
 
 def todo(request, todo_list, pk):
-    todo = get_object_or_404(Todo, pk=pk)
-    if request.method == 'GET':
-        # read todo
-        response = serialize('json', [todo])
-        return JsonResponse(response, safe=False)
-    elif request.method == 'PUT':
-        # edit todo
-        pass
-    elif request.method == 'DELETE':
-        # delete todo
-        todo.delete()
-
     return HttpResponse('Success')
