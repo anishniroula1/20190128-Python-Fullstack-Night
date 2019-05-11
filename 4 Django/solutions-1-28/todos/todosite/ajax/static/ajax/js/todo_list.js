@@ -20,7 +20,7 @@ async function apiCall(url, request_type, body) {
 }
 
 const todo_list = window.location.pathname.split('/').pop()
-const api_path = 'ajax_todos/api/todo_list/' + todo_list
+const api_path = 'ajax/api/todo_list/' + todo_list
 const api_root = `${window.location.protocol}//${window.location.host}/${api_path}/`
 
 const app = new Vue({
@@ -48,6 +48,7 @@ const app = new Vue({
             
         addTodo: function() {
             apiCall(api_root, 'POST', {todo: this.todo})
+            this.todo = ''
         },
 
         deleteTodo: function(pk) {

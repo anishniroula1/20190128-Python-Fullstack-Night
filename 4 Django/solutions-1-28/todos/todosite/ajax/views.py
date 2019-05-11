@@ -4,10 +4,6 @@ from django.http import JsonResponse, HttpResponse
 from django.core.serializers import serialize
 import json
 
-# stuff we need for rest framework api 
-from rest_framework import viewsets
-from .serializers import *
-
 from todo_lists.models import *
 from todos.models import *
 
@@ -85,41 +81,3 @@ def todo(request, todo_list, pk):
 
     return HttpResponse('Success')
 
-
-'''
-DRF api views
-'''
-class TodoViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows todos to be viewed or edited.
-    """
-    # queryset = Todo.objects.filter(user=request.user)
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-
-    def get_queryset(self):
-        if self.request.user:
-            return Todo.objects.filter(user=self.request.user)
-        else:
-            return []
-
-    def perform_create(self, serializer):
-        print(self.request.data)
-        request = self.request
-        todo_list = get_object_or_404(TodoList, pk=request.data['todo_list'])
-        serializer.save(user=self.request.user, todo_list=todo_list)
-
-
-class TodoListViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows todo lists to be viewed or edited.
-    """
-    # queryset = Todo.objects.filter(user=request.user)
-    queryset = TodoList.objects.all()
-    serializer_class = TodoListSerializer
-
-    def get_queryset(self):
-        if self.request.user:
-            return TodoList.objects.filter(user=self.request.user)
-        else:
-            return []
