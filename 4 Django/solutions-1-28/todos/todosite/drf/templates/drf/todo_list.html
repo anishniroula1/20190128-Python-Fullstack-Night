@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> 
+{% endblock extra_styles %}
+
+{% block content %}
+    <div id='app'>
+        <h1>Welcome {{ user }}! Here are your todo lists.</h1>
+
+        <input 
+            v-model='todo'
+            @keydown.enter='addTodo'
+            id='todo-input' 
+            type='text' 
+            name='todo' 
+            placeholder='Enter a task...' 
+        />
+
+        <ul id='todos-container'>
+            {% if not user.is_authenticated %}
+                <li>Please login to see your todo lists.</li>
+            {% endif %}
+            <li v-for="todo in todos" 
+                v-bind:class='{completed: todo.completed}'
+                v-bind:key='todo.id'
+            >
+                <span v-if='editing === todo.id'>
+                    <input 
+                        v-model='edit'
+                        @keydown.enter='editTodo(todo)'
+                        type='text' 
+                    />
+                </span>
+                <span v-else>${ todo.text }</span>
+
+                <i @click='deleteTodo(todo)' class="fa fa-times"></i>
+                <i @click='toggleTodo(todo)' 
+                    v-if="todo.completed" class="fa fa-undo"></i>
+                <i @click='toggleTodo(todo)' 
+                    v-else class="fa fa-check"></i>
+                <i @click='editView(todo)' class="fa fa-pencil-alt"></i>
+            </li>
+        </ul>
+    </div>
+{% endblock content %}
+{% block js_body %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src='{% static "drf/js/todo_list.js" %}'></script>
+{% endblock js_body %}
