@@ -3,18 +3,35 @@ from django.shortcuts import render, get_object_or_404
 # drf imports
 from rest_framework import viewsets
 from .serializers import *
+from .permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from todos.models import *
 from todo_lists.models import *
 
 class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
+    permission_classes = (IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly,)
+
 
     def get_queryset(self):
         """
         defines what is returned when you send a GET request to this API endpoint
         """
         return Todo.objects.filter(user=self.request.user)
+
+    def get_object(self):
+        """
+        defines what is returned when we access a single todo object.
+        this checks if the user has the permissions to modify the object (i.e. make 
+        POST/PUT/PATCH/DELETE requests), or otherwise is read-only (only GET/HEAD/OPTIONS).
+        """
+        queryset = self.get_queryset()
+        obj = get_object_or_404(
+            queryset,
+            pk=self.kwargs['pk'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def perform_create(self, serializer):
         """
@@ -30,12 +47,26 @@ class TodoViewSet(viewsets.ModelViewSet):
 
 class TodoListViewSet(viewsets.ModelViewSet):
     serializer_class = TodoListSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
     def get_queryset(self):
         """
         defines what is returned when you send a GET request to this API endpoint
         """        
         return TodoList.objects.filter(user=self.request.user)
+
+    def get_object(self):
+        """
+        defines what is returned when we access a single todo object.
+        this checks if the user has the permissions to modify the object (i.e. make 
+        POST/PUT/PATCH/DELETE requests), or otherwise is read-only (only GET/HEAD/OPTIONS).
+        """
+        queryset = self.get_queryset()
+        obj = get_object_or_404(
+            queryset,
+            pk=self.kwargs['pk'])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def perform_create(self, serializer):
         """
