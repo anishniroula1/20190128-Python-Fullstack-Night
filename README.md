@@ -1,7 +1,7 @@
 # 20190128-Python-FullStack-Night
 Repo for the PDX Code Guild Python Full Stack night course starting 01/28/2019
 
-Class is held from **January 28, 2019 - ~~May 24, 2019~~ May 28th**
+Class is held from **January 28, 2019 - ~~May 24, 2019~~ ~~May 28th~~ May 30th**
 
 M-F 6:00PM – 9:30PM
 
