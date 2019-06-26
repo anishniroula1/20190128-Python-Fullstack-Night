@@ -133,7 +133,7 @@ Write functions to find the minimum, maximum, mean, and (optionally) mode of a l
 def minimum(nums):
     ...
 
-def maxmimum(nums):
+def maximum(nums):
     ...
 
 def mean(nums):
